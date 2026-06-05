@@ -1,39 +1,127 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" role="img" aria-labelledby="title desc">
-  <title id="title">DAB 移相调制原理波形</title>
-  <desc id="desc">用左桥方波、右桥方波、主移相、内移相和谐振电流示意 DAB 调制原理。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 780" role="img" aria-labelledby="title desc">
+  <title id="title">SR-DAB 桥臂 PWM 与移相调制直观图</title>
+  <desc id="desc">按拓扑图中的 A、B、C、D 桥臂展开四组互补 PWM，再由桥臂相位关系得到左桥等效电压、右桥等效电压、主移相、桥内移相和谐振电流。</desc>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0 0 L10 5 L0 10Z" fill="#55a84b"/>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#4da146"/>
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#e97f9a"/>
     </marker>
     <style>
-      .bg{fill:#fbfff9}.axis{stroke:#a9c9a7;stroke-width:2}.wave1{stroke:#4da146;stroke-width:5;fill:none;stroke-linejoin:round}.wave2{stroke:#f2ad2e;stroke-width:5;fill:none;stroke-linejoin:round}.wave3{stroke:#42a9b7;stroke-width:4;fill:none}.label{fill:#17331f;font:800 20px 'Microsoft YaHei',Arial}.small{fill:#66806b;font:16px 'Microsoft YaHei',Arial}.arrow{stroke:#55a84b;stroke-width:3;marker-end:url(#arrow)}.mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}.box{fill:#fff;stroke:#b9dfb6;stroke-width:2}
+      .bg{fill:#fbfff9}
+      .box{fill:#fff;stroke:#b9dfb6;stroke-width:2}
+      .soft{fill:#f3fbf1;stroke:#c9e8c5;stroke-width:1.6}
+      .axis{stroke:#b5d4b4;stroke-width:1.7}
+      .tick{stroke:#dcebd9;stroke-width:1.2}
+      .wave-a{stroke:#3f9941;stroke-width:4;fill:none;stroke-linejoin:round}
+      .wave-b{stroke:#7ac66f;stroke-width:4;fill:none;stroke-linejoin:round}
+      .wave-c{stroke:#f0a928;stroke-width:4;fill:none;stroke-linejoin:round}
+      .wave-d{stroke:#f5c66a;stroke-width:4;fill:none;stroke-linejoin:round}
+      .wave-l{stroke:#23823b;stroke-width:5;fill:none;stroke-linejoin:round}
+      .wave-r{stroke:#d89416;stroke-width:5;fill:none;stroke-linejoin:round}
+      .current{stroke:#3aa7b4;stroke-width:4.5;fill:none}
+      .label{fill:#17331f;font:800 22px 'Microsoft YaHei',Arial}
+      .sub{fill:#66806b;font:16px 'Microsoft YaHei',Arial}
+      .small{fill:#55715d;font:15px 'Microsoft YaHei',Arial}
+      .tiny{fill:#66806b;font:13px 'Microsoft YaHei',Arial}
+      .mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}
+      .guide{stroke:#4da146;stroke-width:3;marker-end:url(#arrow-green)}
+      .guide-rose{stroke:#e97f9a;stroke-width:3;marker-end:url(#arrow-rose)}
+      .tag{fill:#e8f8e1;stroke:#b9dfb6;stroke-width:1.4}
+      .tag2{fill:#fff7e3;stroke:#f0c76f;stroke-width:1.4}
     </style>
   </defs>
-  <rect class="bg" width="980" height="420" rx="24"/>
-  <rect class="box" x="34" y="30" width="912" height="340" rx="18"/>
-  <text class="label" x="58" y="70">移相调制的直观理解</text>
-  <text class="small" x="58" y="100">主移相决定两桥方波谁领先，内移相改变单桥等效脉宽，谐振电流跟随电压差变化。</text>
 
-  <line class="axis" x1="170" y1="155" x2="900" y2="155"/>
-  <line class="axis" x1="170" y1="235" x2="900" y2="235"/>
-  <line class="axis" x1="170" y1="315" x2="900" y2="315"/>
-  <text class="label" x="58" y="162">左桥方波</text>
-  <text class="label" x="58" y="242">右桥方波</text>
-  <text class="label" x="58" y="322">谐振电流</text>
+  <rect class="bg" width="1240" height="780" rx="24"/>
+  <rect class="box" x="34" y="30" width="1172" height="692" rx="22"/>
 
-  <path class="wave1" d="M180 130 H300 V180 H430 V130 H560 V180 H690 V130 H820 V180 H900"/>
-  <path class="wave2" d="M180 260 H350 V210 H480 V260 H610 V210 H740 V260 H870 V210 H900"/>
-  <path class="wave3" d="M180 315 C230 270 280 270 330 315 S430 360 480 315 S580 270 630 315 S730 360 780 315 S870 270 900 300"/>
+  <text class="label" x="62" y="72">按拓扑桥臂展开 PWM，再理解移相调制</text>
+  <text class="sub" x="62" y="104">A/B 是左有源桥两桥臂，C/D 是右有源桥两桥臂；每个桥臂上下管互补，桥臂之间的相位差决定等效桥输出。</text>
 
-  <line class="mark" x1="300" y1="118" x2="300" y2="270"/>
-  <line class="mark" x1="350" y1="118" x2="350" y2="270"/>
-  <line class="arrow" x1="304" y1="112" x2="346" y2="112"/>
-  <text class="small" x="360" y="118">主移相 φ：控制功率方向和粗功率</text>
+  <rect class="soft" x="56" y="130" width="524" height="292" rx="18"/>
+  <rect class="soft" x="660" y="130" width="524" height="292" rx="18"/>
+  <text class="label" x="78" y="166">左有源桥 PWM</text>
+  <text class="label" x="682" y="166">右有源桥 PWM</text>
+  <text class="small" x="78" y="194">A 桥臂与 B 桥臂的桥内移相形成左桥等效方波。</text>
+  <text class="small" x="682" y="194">C 桥臂与 D 桥臂的桥内移相形成右桥等效方波。</text>
 
-  <line class="mark" x1="430" y1="118" x2="430" y2="195"/>
-  <line class="mark" x1="560" y1="118" x2="560" y2="195"/>
-  <line class="arrow" x1="436" y1="198" x2="554" y2="198"/>
-  <text class="small" x="575" y="204">桥内移相：改变等效脉宽</text>
+  <g id="grid-left">
+    <line class="axis" x1="198" y1="236" x2="548" y2="236"/>
+    <line class="axis" x1="198" y1="286" x2="548" y2="286"/>
+    <line class="axis" x1="198" y1="336" x2="548" y2="336"/>
+    <line class="axis" x1="198" y1="386" x2="548" y2="386"/>
+    <line class="tick" x1="254" y1="222" x2="254" y2="398"/>
+    <line class="tick" x1="338" y1="222" x2="338" y2="398"/>
+    <line class="tick" x1="424" y1="222" x2="424" y2="398"/>
+    <line class="tick" x1="508" y1="222" x2="508" y2="398"/>
+  </g>
+  <text class="small" x="78" y="242">A_H 上管</text>
+  <text class="small" x="78" y="292">A_L 下管</text>
+  <text class="small" x="78" y="342">B_H 上管</text>
+  <text class="small" x="78" y="392">B_L 下管</text>
+  <path class="wave-a" d="M204 218 H286 V254 H372 V218 H458 V254 H544"/>
+  <path class="wave-a" d="M204 304 H286 V268 H372 V304 H458 V268 H544"/>
+  <path class="wave-b" d="M204 354 H246 V318 H332 V354 H418 V318 H504 V354 H544"/>
+  <path class="wave-b" d="M204 318 H246 V354 H332 V318 H418 V354 H504 V318 H544"/>
 
-  <text class="small" x="58" y="394">本工程把 φ 拆成 main_phase_deg、left_inner_deg、right_inner_deg 三个可调量。</text>
+  <g id="grid-right">
+    <line class="axis" x1="802" y1="236" x2="1152" y2="236"/>
+    <line class="axis" x1="802" y1="286" x2="1152" y2="286"/>
+    <line class="axis" x1="802" y1="336" x2="1152" y2="336"/>
+    <line class="axis" x1="802" y1="386" x2="1152" y2="386"/>
+    <line class="tick" x1="874" y1="222" x2="874" y2="398"/>
+    <line class="tick" x1="958" y1="222" x2="958" y2="398"/>
+    <line class="tick" x1="1044" y1="222" x2="1044" y2="398"/>
+    <line class="tick" x1="1128" y1="222" x2="1128" y2="398"/>
+  </g>
+  <text class="small" x="682" y="242">C_H 上管</text>
+  <text class="small" x="682" y="292">C_L 下管</text>
+  <text class="small" x="682" y="342">D_H 上管</text>
+  <text class="small" x="682" y="392">D_L 下管</text>
+  <path class="wave-c" d="M808 218 H918 V254 H1004 V218 H1090 V254 H1150"/>
+  <path class="wave-c" d="M808 304 H918 V268 H1004 V304 H1090 V268 H1150"/>
+  <path class="wave-d" d="M808 354 H884 V318 H970 V354 H1056 V318 H1142 V354 H1150"/>
+  <path class="wave-d" d="M808 318 H884 V354 H970 V318 H1056 V354 H1142 V318 H1150"/>
+
+  <line class="mark" x1="286" y1="220" x2="286" y2="404"/>
+  <line class="mark" x1="246" y1="220" x2="246" y2="404"/>
+  <line class="guide-rose" x1="250" y1="410" x2="282" y2="410"/>
+  <text class="tiny" x="294" y="415">左桥内移相 left_inner_deg：A/B 桥臂错开</text>
+
+  <line class="mark" x1="918" y1="220" x2="918" y2="404"/>
+  <line class="mark" x1="884" y1="220" x2="884" y2="404"/>
+  <line class="guide-rose" x1="888" y1="410" x2="914" y2="410"/>
+  <text class="tiny" x="930" y="415">右桥内移相 right_inner_deg：C/D 桥臂错开</text>
+
+  <rect class="soft" x="56" y="454" width="1128" height="210" rx="18"/>
+  <text class="label" x="78" y="492">由桥臂 PWM 得到等效桥输出，再比较左右桥相位</text>
+  <text class="sub" x="78" y="520">等效方波不是独立产生的，它来自同一全桥两桥臂中点电压的差。主移相比较的是左桥等效输出与右桥等效输出的整体错开量。</text>
+
+  <line class="axis" x1="216" y1="568" x2="1138" y2="568"/>
+  <line class="axis" x1="216" y1="622" x2="1138" y2="622"/>
+  <line class="axis" x1="216" y1="676" x2="1138" y2="676"/>
+  <text class="label" x="78" y="575">Vab 左桥</text>
+  <text class="label" x="78" y="629">Vcd 右桥</text>
+  <text class="label" x="78" y="683">iLr 电流</text>
+
+  <path class="wave-l" d="M226 542 H346 V594 H466 V542 H586 V594 H706 V542 H826 V594 H946 V542 H1066 V594 H1134"/>
+  <path class="wave-r" d="M226 648 H408 V596 H528 V648 H648 V596 H768 V648 H888 V596 H1008 V648 H1128 V596 H1134"/>
+  <path class="current" d="M226 676 C286 620 346 620 406 676 S526 732 586 676 S706 620 766 676 S886 732 946 676 S1066 620 1134 666"/>
+
+  <line class="mark" x1="346" y1="532" x2="346" y2="654"/>
+  <line class="mark" x1="408" y1="532" x2="408" y2="654"/>
+  <line class="guide" x1="352" y1="528" x2="402" y2="528"/>
+  <text class="small" x="420" y="534">主移相 main_phase_deg：左右桥等效方波整体错开</text>
+
+  <rect class="tag" x="226" y="692" width="178" height="34" rx="17"/>
+  <text class="tiny" x="244" y="714">SPS：只调主移相</text>
+  <rect class="tag2" x="420" y="692" width="200" height="34" rx="17"/>
+  <text class="tiny" x="438" y="714">DPS/EPS：再调一侧内移相</text>
+  <rect class="tag" x="638" y="692" width="226" height="34" rx="17"/>
+  <text class="tiny" x="656" y="714">TPS：左右内移相都参与细调</text>
+  <rect class="tag2" x="884" y="692" width="226" height="34" rx="17"/>
+  <text class="tiny" x="902" y="714">VFM：改变频率，调谐振腔阻抗</text>
+
+  <text class="small" x="62" y="754">读图顺序：先看 A/B/C/D 桥臂上下管互补，再看 A-B、C-D 形成的等效方波，最后用主移相和桥内移相解释功率方向、电流细调和软开关窗口。</text>
 </svg>

@@ -714,11 +714,13 @@ figcaption {
 }
 
 .timeline h2 {
+  grid-column: 2;
   margin-bottom: 10px;
   font-size: clamp(1.35rem, 2vw, 1.8rem);
 }
 
 .timeline p {
+  grid-column: 2;
   color: var(--muted);
 }
 
@@ -910,6 +912,11 @@ figcaption {
 
   .timeline article {
     grid-template-columns: 1fr;
+  }
+
+  .timeline h2,
+  .timeline p {
+    grid-column: 1;
   }
 
   .hero-badge {

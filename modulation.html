@@ -26,13 +26,13 @@
     <section class="page-hero">
       <p class="section-kicker">Modulation</p>
       <h1>从单移相到三重移相</h1>
-      <p>最直观的入口是“两个方波错开一点就能传功率”。继续往下看会发现，低压大电流场景只靠一个移相角不够细，所以需要把主移相、桥内移相和频率分别理解。</p>
+      <p>最直观的入口不是直接看公式，而是先看 A、B、C、D 四个桥臂的互补 PWM。A/B 组合成左桥等效方波，C/D 组合成右桥等效方波；主移相改变左右桥整体错开量，桥内移相改变单个全桥的等效脉宽。</p>
     </section>
 
     <section class="section">
       <figure class="showcase-figure">
         <img src="assets/phase-shift-principle.svg" alt="DAB 移相调制原理波形图">
-        <figcaption>自绘波形图：先用主移相理解功率方向，再用桥内移相理解等效脉宽和电流细调。</figcaption>
+        <figcaption>自绘波形图：按拓扑中的 A/B/C/D 桥臂展开上下管互补 PWM，再汇总成 Vab、Vcd 和谐振电流，用于解释主移相与桥内移相。</figcaption>
       </figure>
     </section>
 
@@ -41,24 +41,24 @@
         <article class="mod-card">
           <span class="pill">SPS</span>
           <h2>单移相</h2>
-          <p>两侧全桥都输出 50% 占空比方波，只改变原边与副边方波的相对错开量。可以把它理解成“两台高频交流源在变压器两边拉开时间差”，谁领先，能量就更倾向于从谁流向另一侧。</p>
+          <p>A/B 与 C/D 各自保持固定的桥内关系，只改变 Vab 与 Vcd 的整体相位差。可以把它理解成“两台高频交流源在变压器两边拉开时间差”，谁领先，能量就更倾向于从谁流向另一侧。</p>
           <div class="wave-stack" aria-hidden="true"><i></i><i></i></div>
           <p class="note">直观结论：一个旋钮就能控制方向和粗功率，适合建立基本概念；局限是宽电压比、轻载或小电流目标下，环流和电流尖峰不容易压下来。</p>
         </article>
         <article class="mod-card">
           <span class="pill amber">DPS</span>
           <h2>双移相</h2>
-          <p>在主移相之外，再给某一侧全桥加入桥内移相。直观上，它不是只让两侧方波整体错开，而是把其中一侧方波“压窄”或“展开”，让变压器两端电压差的持续时间可调。</p>
+          <p>在主移相之外，再给某一侧全桥加入桥内移相。例如让 A/B 桥臂不再保持固定错开，而是把左桥 Vab 的等效脉宽“压窄”或“展开”，让变压器两端电压差的持续时间可调。</p>
           <p class="note">直观结论：主移相负责大方向，桥内移相负责修电流形状。它比 SPS 更适合预充、小电流和宽输入范围，因为可以减少不必要的 RMS 电流。</p>
         </article>
         <article class="mod-card important">
           <span class="pill cyan">TPS</span>
           <h2>三重移相</h2>
-          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。直观上，它相当于“一个方向/粗功率旋钮 + 两个桥内细调旋钮”。</p>
+          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。直观上，它相当于“一个方向/粗功率旋钮 + A/B 桥内细调 + C/D 桥内细调”。</p>
           <ul>
             <li>主移相：决定主要功率方向和粗调电流。</li>
-            <li>左桥内移相：改变左侧等效脉宽，调节左侧桥施加到谐振腔的电压时间。</li>
-            <li>右桥内移相：改变右侧等效脉宽，进一步修正电流峰值、RMS 电流和软开关窗口。</li>
+            <li>左桥内移相：改变 A 桥臂与 B 桥臂的相对位置，调节 Vab 等效脉宽。</li>
+            <li>右桥内移相：改变 C 桥臂与 D 桥臂的相对位置，调节 Vcd 等效脉宽。</li>
           </ul>
           <p class="note">直观结论：TPS 的好处不是“更复杂”，而是多了可分工的控制量。题目电压范围宽，B 侧电压低，电流目标又要可设置，因此工程最终围绕 TPS 状态机展开。</p>
         </article>
