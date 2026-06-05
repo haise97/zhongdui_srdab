@@ -26,7 +26,7 @@
     <section class="page-hero">
       <p class="section-kicker">Power Stage</p>
       <h1>主电路拓扑</h1>
-      <p>我理解这张图时，先把它看成“两台可以互相逆变/整流的桥”，中间用串联谐振腔和高频变压器连接。这样就能解释为什么它既能 A 到 B，也能 B 到 A。</p>
+      <p>理解这张图时，可以先把它看成“两台可以互相逆变/整流的桥”，中间用串联谐振腔和高频变压器连接。这样就能解释为什么它既能 A 到 B，也能 B 到 A。</p>
     </section>
 
     <section class="section">
@@ -35,7 +35,7 @@
         <figcaption>高清重绘版：突出 A/B 端口、两侧有源桥、Lr-Cr 谐振腔、隔离变压器和双向能量流。</figcaption>
       </figure>
       <div class="topology-grid">
-        <article><b>左侧有源桥</b><span>把 A 侧直流电压变成高频方波。对我来说，它是“能量入口”或“能量出口”，取决于主移相方向。</span></article>
+        <article><b>左侧有源桥</b><span>把 A 侧直流电压变成高频方波。它既可以是“能量入口”，也可以是“能量出口”，取决于主移相方向。</span></article>
         <article><b>串联谐振腔</b><span>Lr 与 Cr 不是装饰件，而是电流通道。它让电流变化更可控，也给软开关留下空间。</span></article>
         <article><b>隔离变压器</b><span>题目明确要求功率隔离传输，所以变压器既是安全隔离，也是低压大电流匹配的核心。</span></article>
         <article><b>右侧有源桥</b><span>B 侧面对的是 3V-4.2V 锂电范围，电流不小，因此同步整流、采样和闭环判断都很关键。</span></article>
@@ -46,9 +46,9 @@
       <div class="section-head split">
         <div>
           <p class="section-kicker">Energy Flow</p>
-          <h2>我先把功率方向拆成两条路径</h2>
+          <h2>先把功率方向拆成两条路径</h2>
         </div>
-        <p>理解双向变换时，最容易混乱的是“谁在供电、谁在被充电”。我先把所有工况归纳成 A→B 和 B→A，再分别处理电流目标和截止电压。</p>
+        <p>理解双向变换时，最容易混乱的是“谁在供电、谁在被充电”。项目把所有工况先归纳成 A→B 和 B→A，再分别处理电流目标和截止电压。</p>
       </div>
       <figure class="showcase-figure">
         <img src="assets/energy-flow-modes.svg" alt="SR-DAB 双向能量流示意图">
@@ -73,7 +73,7 @@
     <section class="section">
       <div class="section-head split">
         <div>
-          <p class="section-kicker">My Understanding</p>
+          <p class="section-kicker">Design Reasoning</p>
           <h2>为什么这个拓扑适合这道题</h2>
         </div>
         <p>题目同时要双向、隔离、可设电流、截止电压和状态显示。SR-DAB 的优势是功率方向可以由相位关系控制，硬件拓扑不需要为正反向分别搭两套功率级。</p>

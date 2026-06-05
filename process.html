@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>完成过程 | zhongdui_srdab</title>
-  <meta name="description" content="以学生视角复盘完成 B 题串联谐振有源双桥试验装置的理解、设计、实现和调试过程。">
+  <meta name="description" content="复盘 B 题串联谐振有源双桥试验装置的理解、设计、实现和调试过程。">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="process">
@@ -25,11 +25,11 @@
 
   <main>
     <section class="page-hero story-hero">
-      <p class="section-kicker">Student Journey</p>
-      <h1>我是怎么理解并完成这道题的</h1>
+      <p class="section-kicker">Project Journey</p>
+      <h1>这道题是怎样被理解和完成的</h1>
       <p>
-        这个网站不是只把题目复制一遍，而是把我作为学生完成 SR-DAB 试验装置时的思考路径讲出来：
-        先读懂题目，再把电源拓扑、调制方式、控制状态机和固件工程连成一条线。
+        这个页面不是重复题目文字，而是把学生完成 SR-DAB 试验装置时的思考路径讲清楚：
+        先把题目变成工程指标，再把电源拓扑、调制方式、控制状态机和固件工程连成一条线。
       </p>
     </section>
 
@@ -45,7 +45,7 @@
         <article>
           <span>01</span>
           <h2>先把题目翻译成工程指标</h2>
-          <p>我先没有急着写 PWM，而是把题目拆成 A 侧、B 侧和三种开关组合。A 侧是 10V-15V 铅酸范围，B 侧是 3V-4.2V 锂电范围；真正要控制的是电流、截止电压和功率方向。</p>
+          <p>项目一开始没有急着写 PWM，而是先拆 A 侧、B 侧和三种开关组合。A 侧是 10V-15V 铅酸范围，B 侧是 3V-4.2V 锂电范围；真正要控制的是电流、截止电压和功率方向。</p>
         </article>
         <article>
           <span>02</span>
@@ -55,7 +55,7 @@
         <article>
           <span>03</span>
           <h2>从单移相理解到三重移相</h2>
-          <p>我先用单移相理解“相位差决定功率方向”，再意识到低压大电流场景只靠一个移相角不够细。于是工程里把主移相、左桥内移相、右桥内移相拆开控制。</p>
+          <p>先用单移相建立“相位差决定功率方向”的直觉，再发现低压大电流场景只靠一个移相角不够细。工程里因此把主移相、左桥内移相、右桥内移相拆开控制。</p>
         </article>
         <article>
           <span>04</span>
@@ -68,8 +68,8 @@
     <section class="section">
       <div class="section-head split">
         <div>
-          <p class="section-kicker">What I Learned</p>
-          <h2>这个题让我真正意识到的难点</h2>
+          <p class="section-kicker">Engineering Lessons</p>
+          <h2>这个题真正难在哪里</h2>
         </div>
         <p>低压大电流题目看上去电压不高，但控制和工程细节一点都不轻松。采样噪声、相位分辨率、软开关窗口、保护边界和人机交互都会影响最终效果。</p>
       </div>

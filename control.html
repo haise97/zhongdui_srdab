@@ -26,7 +26,7 @@
     <section class="page-hero">
       <p class="section-kicker">Control</p>
       <h1>分层控制策略</h1>
-      <p>我最后没有把控制写成“电压误差直接改移相”。更稳的做法是先判断充电阶段，再让电流环和电压外环慢慢生成相位命令。</p>
+      <p>控制没有写成“电压误差直接改移相”。更稳的做法是先判断充电阶段，再让电流环和电压外环慢慢生成相位命令。</p>
     </section>
 
     <section class="section">
@@ -83,7 +83,7 @@
           <p class="section-kicker">Code Evidence</p>
           <h2>控制页面对应哪些代码证据</h2>
         </div>
-        <p>我希望这个网站不是“凭空讲控制”，所以把每个控制概念都指向一个工程模块。</p>
+        <p>为了避免“凭空讲控制”，页面把每个控制概念都指向一个工程模块。</p>
       </div>
       <div class="mapping-table" role="table" aria-label="控制策略与代码对应表">
         <div role="row"><b role="cell">采样与物理量</b><span role="cell"><code>ADC_Signal_Process.*</code></span><em role="cell">钳位、拟合、限斜率、低通，输出 A/B 电压电流。</em></div>

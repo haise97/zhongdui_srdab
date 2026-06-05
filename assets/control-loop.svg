@@ -10,7 +10,7 @@
     </style>
   </defs>
   <rect class="bg" width="980" height="420" rx="24"/>
-  <text class="label" x="44" y="54">我在代码里采用的分层闭环</text>
+  <text class="label" x="44" y="54">代码中的分层闭环控制结构</text>
 
   <g transform="translate(46 105)">
     <rect class="card" width="150" height="92" rx="16"/>

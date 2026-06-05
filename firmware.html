@@ -26,7 +26,7 @@
     <section class="page-hero">
       <p class="section-kicker">Firmware</p>
       <h1>STM32G474 工程结构</h1>
-      <p>工程目录为 <code>SR_DAB</code>。我把它拆成板级启动、PWM、ADC 处理、TPS 状态机、显示、按键和串口工具几个模块，这样网站里的讲解能和真实代码对应上。</p>
+      <p>工程目录为 <code>SR_DAB</code>。固件被拆成板级启动、PWM、ADC 处理、TPS 状态机、显示、按键和串口工具几个模块，这样网站里的讲解能和真实代码对应上。</p>
     </section>
 
     <section class="section">
@@ -46,7 +46,7 @@
           <p class="section-kicker">Execution Path</p>
           <h2>主程序实际怎么跑</h2>
         </div>
-        <p>这部分是我把“网页讲解”和“真实代码”连起来的关键。主循环不是只负责一个功能，而是把串口、按键、LCD、ADC 和控制任务持续调度起来。</p>
+        <p>这部分是把“网页讲解”和“真实代码”连起来的关键。主循环不是只负责一个功能，而是把串口、按键、LCD、ADC 和控制任务持续调度起来。</p>
       </div>
       <div class="pipeline">
         <article><span>1</span><b>外设初始化</b><p>CubeMX 生成 GPIO、DMA、ADC1-4、USART1、HRTIM1、TIM16 初始化。</p></article>

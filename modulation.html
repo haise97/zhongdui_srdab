@@ -26,7 +26,7 @@
     <section class="page-hero">
       <p class="section-kicker">Modulation</p>
       <h1>从单移相到三重移相</h1>
-      <p>我一开始只理解“两个方波错开一点就能传功率”。后面才发现，低压大电流场景里只靠一个移相角不够细，所以需要把主移相和桥内移相分开看。</p>
+      <p>最直观的入口是“两个方波错开一点就能传功率”。继续往下看会发现，低压大电流场景只靠一个移相角不够细，所以需要把主移相、桥内移相和频率分别理解。</p>
     </section>
 
     <section class="section">
@@ -41,39 +41,56 @@
         <article class="mod-card">
           <span class="pill">SPS</span>
           <h2>单移相</h2>
-          <p>两侧全桥保持 50% 占空比，只改变原边与副边方波的主移相角。这个方式最适合理解“相位差为什么能控制双向功率”。</p>
+          <p>两侧全桥都输出 50% 占空比方波，只改变原边与副边方波的相对错开量。可以把它理解成“两台高频交流源在变压器两边拉开时间差”，谁领先，能量就更倾向于从谁流向另一侧。</p>
           <div class="wave-stack" aria-hidden="true"><i></i><i></i></div>
-          <p class="note">优点是实现简单；缺点是在宽电压比和轻载时环流较大，低功率控制分辨率不足。</p>
+          <p class="note">直观结论：一个旋钮就能控制方向和粗功率，适合建立基本概念；局限是宽电压比、轻载或小电流目标下，环流和电流尖峰不容易压下来。</p>
         </article>
         <article class="mod-card">
           <span class="pill amber">DPS</span>
           <h2>双移相</h2>
-          <p>在主移相之外加入一个桥内移相，使其中一侧的等效输出脉宽可调。这样可以把功率传输和电流形状分开调一点。</p>
-          <p class="note">适合预充、小电流和宽输入范围场景，比 SPS 更容易降低 RMS 电流。</p>
+          <p>在主移相之外，再给某一侧全桥加入桥内移相。直观上，它不是只让两侧方波整体错开，而是把其中一侧方波“压窄”或“展开”，让变压器两端电压差的持续时间可调。</p>
+          <p class="note">直观结论：主移相负责大方向，桥内移相负责修电流形状。它比 SPS 更适合预充、小电流和宽输入范围，因为可以减少不必要的 RMS 电流。</p>
         </article>
         <article class="mod-card important">
           <span class="pill cyan">TPS</span>
           <h2>三重移相</h2>
-          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。我把它理解成“一个方向旋钮 + 两个细调旋钮”。</p>
+          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。直观上，它相当于“一个方向/粗功率旋钮 + 两个桥内细调旋钮”。</p>
           <ul>
             <li>主移相：决定主要功率方向和粗调电流。</li>
-            <li>左桥内移相：参与左侧等效脉宽与细调。</li>
-            <li>右桥内移相：参与右侧等效脉宽、精细电流校正和软开关窗口。</li>
+            <li>左桥内移相：改变左侧等效脉宽，调节左侧桥施加到谐振腔的电压时间。</li>
+            <li>右桥内移相：改变右侧等效脉宽，进一步修正电流峰值、RMS 电流和软开关窗口。</li>
           </ul>
-          <p class="note">这也是我在工程里最终围绕 TPS 写状态机的原因：题目电压范围宽，B 侧电压低，电流目标又要能设置，单一旋钮不够好用。</p>
+          <p class="note">直观结论：TPS 的好处不是“更复杂”，而是多了可分工的控制量。题目电压范围宽，B 侧电压低，电流目标又要可设置，因此工程最终围绕 TPS 状态机展开。</p>
         </article>
         <article class="mod-card">
           <span class="pill">EPS</span>
           <h2>扩展移相</h2>
-          <p>可以理解为 TPS 的简化用法：开放主移相和一个桥内移相，固定另一个自由度。调试参数更少，但仍比 SPS 灵活。</p>
-          <p class="note">现场调试时可先用 EPS 找稳定区，再逐步开放 TPS 的第三个自由度。</p>
+          <p>EPS 可以看作 SPS 和 TPS 之间的折中：开放主移相，同时开放一个桥内移相，另一个自由度固定或按规则联动。它比 SPS 多一个“修形状”的旋钮，又比完整 TPS 更容易调。</p>
+          <p class="note">直观结论：EPS 适合从简单控制过渡到多自由度控制。现场调试时可先用 EPS 找稳定区，再逐步开放 TPS 的第三个自由度。</p>
         </article>
         <article class="mod-card">
           <span class="pill amber">VFM</span>
           <h2>变频调制</h2>
-          <p>串联谐振腔的等效阻抗随频率变化。靠近谐振点传输能力强，远离谐振点传输能力弱，可作为移相控制的辅助量。</p>
-          <p class="note">工程提供 10kHz-100kHz 频率接口，默认 20kHz；当前以 TPS 电流闭环为主。</p>
+          <p>串联谐振腔的阻抗会随频率变化。靠近谐振点时，谐振支路更“愿意让电流通过”，传输能力更强；远离谐振点时，等效阻抗增大，传输能力下降。</p>
+          <p class="note">直观结论：变频像是在调谐振腔的“通畅程度”。工程提供 10kHz-100kHz 频率接口，默认 20kHz；当前把 TPS 电流闭环放在主位置，变频保留为扩展量。</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section compact-section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Intuitive Comparison</p>
+          <h2>五种调制方式的直观对比</h2>
+        </div>
+        <p>下面这张表按“脑子里该怎么想”来整理，而不是直接堆公式。先理解每个旋钮在改变什么，再回到代码变量会更顺。</p>
+      </div>
+      <div class="mapping-table modulation-compare" role="table" aria-label="调制方式直观对比表">
+        <div role="row"><b role="cell">SPS 单移相</b><span role="cell">只错开两侧方波，好比两台高频交流源打时间差。</span><em role="cell">最简单，适合建立方向概念；轻载和宽电压比时环流较难优化。</em></div>
+        <div role="row"><b role="cell">DPS 双移相</b><span role="cell">在错开两侧方波的同时，压窄一侧等效脉宽。</span><em role="cell">能兼顾功率和电流形状，适合预充、小电流、减小 RMS 电流。</em></div>
+        <div role="row"><b role="cell">TPS 三重移相</b><span role="cell">主移相定方向，两侧桥内移相分别修电流和软开关窗口。</span><em role="cell">自由度最多，适合本题的宽电压范围、低压大电流和可设电流目标。</em></div>
+        <div role="row"><b role="cell">EPS 扩展移相</b><span role="cell">保留主移相，再开放一个桥内移相，另一个自由度固定或联动。</span><em role="cell">比 SPS 灵活，比 TPS 更好调，适合从简单实验过渡到完整控制。</em></div>
+        <div role="row"><b role="cell">VFM 变频</b><span role="cell">改变开关频率，等于改变谐振腔的等效通畅程度。</span><em role="cell">可作为辅助调节量；本项目当前以 TPS 电流闭环为主。</em></div>
       </div>
     </section>
 
@@ -92,7 +109,7 @@
         <div role="row"><b role="cell">频率</b><span role="cell"><code>PWM_SR_DAB_SetFrequencyHz()</code></span><em role="cell">10kHz-100kHz 可扩展控制量</em></div>
       </div>
       <div class="reference-panel">
-        <h3>我参考后形成的理解</h3>
+        <h3>参考后形成的理解</h3>
         <p>公开资料中，DAB 常见控制会从单移相扩展到双移相、三重移相，以降低环流、扩展软开关范围并改善宽电压比工况。本项目没有直接照搬公式，而是把这种思想落到三个相位变量和三个 TPS 状态机里。</p>
         <a href="https://www.ti.com/video/6052772079001">TI：Dual Active Bridge 原理视频</a>
         <a href="https://e-archivo.uc3m.es/entities/publication/2d994c9b-6fbd-4f81-85a9-fc033a703ab8">开放论文：TPS 调制研究</a>
@@ -102,13 +119,13 @@
     <section class="section">
       <div class="section-head split">
         <div>
-          <p class="section-kicker">How I Decided</p>
-          <h2>我的调制选择逻辑</h2>
+          <p class="section-kicker">Decision Logic</p>
+          <h2>调制选择逻辑</h2>
         </div>
-        <p>我不是一开始就直接写 TPS，而是先用 SPS 建立直觉：两个方波错开就能传功率。然后再发现，要满足题目里的预充、恒流和恒压，必须给控制器更多自由度。</p>
+        <p>工程不是一开始就直接写 TPS，而是先用 SPS 建立直觉：两个方波错开就能传功率。然后再发现，要满足题目里的预充、恒流和恒压，必须给控制器更多自由度。</p>
       </div>
       <div class="lesson-grid">
-        <article><b>第一步：用 SPS 理解方向</b><span>主移相正负号对应能量方向，这帮助我把 A→B 和 B→A 的状态机分开。</span></article>
+        <article><b>第一步：用 SPS 理解方向</b><span>主移相正负号对应能量方向，这有助于把 A→B 和 B→A 的状态机分开。</span></article>
         <article><b>第二步：用内移相细调</b><span>内移相改变等效脉宽，适合在接近目标电流时做更小步调整。</span></article>
         <article><b>第三步：保留频率接口</b><span>工程保留 10kHz-100kHz 频率接口，但当前把 TPS 电流闭环放在主位置。</span></article>
       </div>

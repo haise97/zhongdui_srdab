@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>zhongdui_srdab | 从 B 题到 SR-DAB 试验装置</title>
-  <meta name="description" content="一个学生完成 B 题串联谐振有源双桥试验装置后的全过程项目复盘网站。">
+  <meta name="description" content="B 题串联谐振有源双桥试验装置的项目展示网站：题目拆解、拓扑理解、调制方式、控制策略和固件工程。">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="home">
@@ -35,8 +35,8 @@
       <h1>zhongdui_srdab</h1>
       <div class="hero-score">SR-DAB</div>
       <p class="hero-subtitle">
-        这是我完成“串联谐振有源双桥试验装置”后的完整记录：从读懂题目要求，到理解 DAB/SR-DAB 拓扑，
-        再到选择三重移相控制、写 STM32G474 固件和整理答辩网站。
+        围绕“串联谐振有源双桥试验装置”的完整工程脉络：从题目指标拆解，到 DAB/SR-DAB 拓扑理解，
+        再到三重移相控制、STM32G474 固件实现和项目答辩式展示。
       </p>
       <div class="hero-actions">
         <a class="button primary" href="process.html">看完成过程</a>
@@ -48,11 +48,11 @@
       <article class="student-card">
         <div class="student-avatar">中</div>
         <div>
-          <p class="section-kicker">Project Identity</p>
-          <h2>这个网站想表达什么</h2>
+          <p class="section-kicker">Project Overview</p>
+          <h2>从题目到工程实现</h2>
           <p>
-            它不是只把 PDF 题目复制一遍，也不是单纯展示代码目录。我的目标是用一个学生的视角讲清楚：
-            拿到题目后我如何拆指标、为什么选择 SR-DAB、为什么需要移相控制，以及工程代码是怎样支撑这些判断的。
+            这个展示站不是把 PDF 题目简单复制，也不是只罗列代码目录。页面以学生完成该题目的过程为主线，
+            说明如何把文字要求转成工程指标、为什么采用 SR-DAB、为什么需要移相调制，以及固件代码怎样支撑这些技术判断。
           </p>
           <div class="chip-row">
             <span>读题拆指标</span>
@@ -66,13 +66,13 @@
     </section>
 
     <section class="section narrow">
-      <p class="section-kicker">Design Upgrade</p>
-      <h2>我把网站改成了“项目答辩路线”</h2>
+      <p class="section-kicker">Narrative Structure</p>
+      <h2>网站采用“项目答辩路线”</h2>
       <div class="audit-grid">
         <article>
           <span>01</span>
-          <h3>先讲我是怎么做的</h3>
-          <p>新增“过程”页面，把读题、查资料、定调制、写状态机和做网站复盘串起来，避免只像技术资料堆叠。</p>
+          <h3>先讲完成路径</h3>
+          <p>“过程”页面把读题、查资料、定调制、写状态机和整理网站串起来，先让读者看到项目是怎样推进的。</p>
         </article>
         <article>
           <span>02</span>
@@ -94,14 +94,14 @@
           <h2>建议按这条路线看</h2>
         </div>
         <p>
-          如果把这个网站当作一次项目答辩，顺序应该是：我怎么理解题目、题目要求是什么、拓扑为什么这样、
+          如果把这个网站当作一次项目答辩，顺序应该是：项目如何理解题目、题目要求是什么、拓扑为什么这样、
           调制怎么控制功率、软件如何实现、工程文件在哪里。
         </p>
       </div>
       <div class="route-grid">
         <a class="route-card" href="process.html">
           <b>完成过程</b>
-          <span>学生视角复盘：读题、查资料、定方案、写代码、调试和整理网站。</span>
+          <span>项目路径复盘：读题、查资料、定方案、写代码、调试和整理网站。</span>
         </a>
         <a class="route-card" href="task.html">
           <b>题目解析</b>
@@ -151,7 +151,7 @@
       <div class="section-head split">
         <div>
           <p class="section-kicker">Evidence</p>
-          <h2>我用哪些依据补充理解</h2>
+          <h2>依据与参考资料</h2>
         </div>
         <p>
           页面中的原理图是自绘的。公开资料主要用来确认 DAB 调制类别、双向 DC/DC 的应用场景，
@@ -160,7 +160,7 @@
       </div>
       <div class="source-panel">
         <p>
-          我没有直接复制网上图片，而是把参考资料消化成自己的框图和解释。这样既统一视觉风格，也更符合“学生复盘”的表达。
+          页面没有直接复制网上图片，而是把参考资料整理成统一风格的自绘框图和解释。这样既便于阅读，也更适合项目展示。
         </p>
         <a href="https://www.ti.com/lit/ug/tidues0f/tidues0f.pdf">TI TIDA-010054 DAB 参考设计</a>
         <a href="https://www.ti.com/video/6052772079001">TI Dual Active Bridge 原理视频</a>
