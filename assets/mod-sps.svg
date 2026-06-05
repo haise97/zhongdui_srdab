@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">SPS 单移相概念图</title>
+  <desc id="desc">SPS 只改变两侧全桥交流端电压 v11 与 v22 的外移相 phi。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#4da146"/>
+    </marker>
+    <style>
+      .bg{fill:#fbfff9}.axis{stroke:#b7d5b5;stroke-width:1.5}.tick{stroke:#e0eedc;stroke-width:1}.v1{stroke:#23823b;stroke-width:5;fill:none;stroke-linejoin:round}.v2{stroke:#d89416;stroke-width:5;fill:none;stroke-linejoin:round}.i{stroke:#3aa7b4;stroke-width:4;fill:none}.label{fill:#17331f;font:800 23px 'Microsoft YaHei',Arial}.small{fill:#55715d;font:16px 'Microsoft YaHei',Arial}.tiny{fill:#66806b;font:14px 'Microsoft YaHei',Arial}.mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}.arrow{stroke:#4da146;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="720" height="360" rx="24"/>
+  <text class="label" x="32" y="46">SPS：只调外移相 φ</text>
+  <text class="small" x="32" y="74">v11、v22 都保持 50% 等效方波，只整体错开。</text>
+  <line class="axis" x1="120" y1="132" x2="682" y2="132"/>
+  <line class="axis" x1="120" y1="204" x2="682" y2="204"/>
+  <line class="axis" x1="120" y1="276" x2="682" y2="276"/>
+  <line class="tick" x1="204" y1="104" x2="204" y2="290"/>
+  <line class="tick" x1="316" y1="104" x2="316" y2="290"/>
+  <line class="tick" x1="428" y1="104" x2="428" y2="290"/>
+  <line class="tick" x1="540" y1="104" x2="540" y2="290"/>
+  <text class="label" x="34" y="139">v11</text>
+  <text class="label" x="34" y="211">v22</text>
+  <text class="label" x="34" y="283">iL</text>
+  <path class="v1" d="M128 104 H240 V160 H352 V104 H464 V160 H576 V104 H680"/>
+  <path class="v2" d="M128 232 H300 V176 H412 V232 H524 V176 H636 V232 H680"/>
+  <path class="i" d="M128 276 C184 226 240 226 296 276 S408 326 464 276 S576 226 680 264"/>
+  <line class="mark" x1="240" y1="96" x2="240" y2="236"/>
+  <line class="mark" x1="300" y1="96" x2="300" y2="236"/>
+  <line class="arrow" x1="248" y1="92" x2="292" y2="92"/>
+  <text class="small" x="312" y="98">φ：桥间外移相</text>
+  <text class="tiny" x="32" y="332">直观理解：只移动 v22 相对 v11 的位置；控制简单，但轻载/宽电压比时环流优化能力有限。</text>
+</svg>

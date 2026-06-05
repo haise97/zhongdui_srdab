@@ -37,42 +37,58 @@
     </section>
 
     <section class="section">
-      <div class="mod-grid">
-        <article class="mod-card">
-          <span class="pill">SPS</span>
-          <h2>单移相</h2>
-          <p>两侧全桥均保持固定 50% 等效方波，只改变 <code>v11</code> 与 <code>v22</code> 的外移相 <code>φ</code>。可以把它理解成“两台高频交流源在变压器两边拉开时间差”，谁领先，能量就更倾向于从谁流向另一侧。</p>
-          <div class="wave-stack" aria-hidden="true"><i></i><i></i></div>
-          <p class="note">直观结论：一个旋钮就能控制方向和粗功率，适合建立基本概念；局限是宽电压比、轻载或小电流目标下，环流和电流尖峰不容易压下来。</p>
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">One By One</p>
+          <h2>每种调制方式单独看</h2>
+        </div>
+        <p>下面不再把所有波形塞进一张图，而是一个调制方式配一张概念图。每张图只解释当前调制方式改变哪个自由度，以及这种改变对电压差和电流趋势的直观影响。</p>
+      </div>
+      <div class="mod-explain-list">
+        <article class="mod-explain-card">
+          <figure><img src="assets/mod-sps.svg" alt="SPS 单移相概念图"></figure>
+          <div>
+            <span class="pill">SPS</span>
+            <h2>单移相</h2>
+            <p>两侧全桥均保持固定 50% 等效方波，只改变 <code>v11</code> 与 <code>v22</code> 的外移相 <code>φ</code>。它最适合建立“相位差决定功率方向”的第一层直觉。</p>
+            <p class="note">看图重点：只有 <code>φ</code> 一个旋钮。优点是简单；不足是轻载、宽电压比或小电流目标下，电流应力和环流不容易继续优化。</p>
+          </div>
         </article>
-        <article class="mod-card">
-          <span class="pill amber">DPS</span>
-          <h2>双移相</h2>
-          <p>常见 DPS 在外移相 <code>φ</code> 之外，引入两侧相同的桥内移相，使 <code>v11</code> 与 <code>v22</code> 的等效脉宽同时变化。这样功率传输和电流形状不再只由一个 <code>φ</code> 决定。</p>
-          <p class="note">直观结论：DPS 比 SPS 多了“调等效脉宽”的自由度，可用于降低电流应力；但两侧内移相通常联动，不如 TPS 灵活。</p>
+        <article class="mod-explain-card">
+          <figure><img src="assets/mod-eps.svg" alt="EPS 扩展移相概念图"></figure>
+          <div>
+            <span class="pill">EPS</span>
+            <h2>扩展移相</h2>
+            <p>EPS 在外移相 <code>φ</code> 之外，只开放一侧桥内移相。直观上，一侧电压波形的等效脉宽被压窄或展开，另一侧仍保持固定 50% 方波。</p>
+            <p class="note">看图重点：它比 SPS 多一个“单侧等效脉宽”自由度，适合从简单调相过渡到多自由度调相。</p>
+          </div>
         </article>
-        <article class="mod-card important">
-          <span class="pill cyan">TPS</span>
-          <h2>三重移相</h2>
-          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。直观上，它相当于外移相 <code>φ</code>、左桥等效脉宽 <code>D1</code>、右桥等效脉宽 <code>D2</code> 三个自由度。</p>
-          <ul>
-            <li>主移相：对应 <code>φ</code>，决定主要功率方向和粗调功率。</li>
-            <li>左桥内移相：对应 <code>D1</code>，调节左桥 <code>v11</code> 的等效脉宽。</li>
-            <li>右桥内移相：对应 <code>D2</code>，调节右桥 <code>v22</code> 的等效脉宽。</li>
-          </ul>
-          <p class="note">直观结论：TPS 的好处不是“更复杂”，而是多了可分工的控制量。题目电压范围宽，B 侧电压低，电流目标又要可设置，因此工程最终围绕 TPS 状态机展开。</p>
+        <article class="mod-explain-card">
+          <figure><img src="assets/mod-dps.svg" alt="DPS 双移相概念图"></figure>
+          <div>
+            <span class="pill amber">DPS</span>
+            <h2>双移相</h2>
+            <p>常见 DPS 在外移相 <code>φ</code> 之外，让两侧桥内移相按相同量联动，因此 <code>v11</code> 与 <code>v22</code> 的等效脉宽同时变化。</p>
+            <p class="note">看图重点：DPS 比 SPS 多了“联动脉宽”自由度，可降低电流应力；但两侧内移相不是完全独立。</p>
+          </div>
         </article>
-        <article class="mod-card">
-          <span class="pill">EPS</span>
-          <h2>扩展移相</h2>
-          <p>EPS 可以看作 SPS 和 TPS 之间的折中：开放外移相 <code>φ</code>，同时只开放一侧桥内移相，另一侧仍保持固定等效脉宽。它比 SPS 多一个“修电压脉宽”的旋钮，又比完整 TPS 更容易调。</p>
-          <p class="note">直观结论：EPS 适合从简单控制过渡到多自由度控制。现场调试时可先用 EPS 找稳定区，再逐步开放 TPS 的第三个自由度。</p>
+        <article class="mod-explain-card important">
+          <figure><img src="assets/mod-tps.svg" alt="TPS 三重移相概念图"></figure>
+          <div>
+            <span class="pill cyan">TPS</span>
+            <h2>三重移相</h2>
+            <p>TPS 同时调节外移相 <code>φ</code>、左桥等效脉宽 <code>D1</code>、右桥等效脉宽 <code>D2</code>。工程变量可理解为 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。</p>
+            <p class="note">看图重点：三个自由度分工，外移相负责功率方向与粗调，两侧内移相负责电流应力、等效脉宽和软开关窗口的细调。</p>
+          </div>
         </article>
-        <article class="mod-card">
-          <span class="pill amber">VFM</span>
-          <h2>变频调制</h2>
-          <p>串联谐振腔的阻抗会随频率变化。靠近谐振点时，谐振支路更“愿意让电流通过”，传输能力更强；远离谐振点时，等效阻抗增大，传输能力下降。</p>
-          <p class="note">直观结论：变频像是在调谐振腔的“通畅程度”。工程提供 10kHz-100kHz 频率接口，默认 20kHz；当前把 TPS 电流闭环放在主位置，变频保留为扩展量。</p>
+        <article class="mod-explain-card">
+          <figure><img src="assets/mod-vfm.svg" alt="VFM 变频调制概念图"></figure>
+          <div>
+            <span class="pill amber">VFM</span>
+            <h2>变频调制</h2>
+            <p>VFM 不改变 <code>φ</code>、<code>D1</code>、<code>D2</code> 的定义，而是改变开关频率相对谐振频率的位置。靠近谐振点时传输能力更强，远离时传输能力下降。</p>
+            <p class="note">看图重点：它像是在调谐振腔的“通畅程度”。本项目保留 10kHz-100kHz 频率接口，但当前以 TPS 电流闭环为主。</p>
+          </div>
         </article>
       </div>
     </section>

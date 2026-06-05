@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">TPS 三重移相概念图</title>
+  <desc id="desc">TPS 独立调节外移相 phi、左桥等效脉宽 D1 和右桥等效脉宽 D2。</desc>
+  <defs>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#4da146"/></marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#e97f9a"/></marker>
+    <style>
+      .bg{fill:#fbfff9}.axis{stroke:#b7d5b5;stroke-width:1.5}.tick{stroke:#e0eedc;stroke-width:1}.v1{stroke:#23823b;stroke-width:5;fill:none;stroke-linejoin:round}.v2{stroke:#d89416;stroke-width:5;fill:none;stroke-linejoin:round}.base{stroke:#97d28e;stroke-width:3;fill:none;stroke-dasharray:9 7}.i{stroke:#3aa7b4;stroke-width:4;fill:none}.label{fill:#17331f;font:800 23px 'Microsoft YaHei',Arial}.small{fill:#55715d;font:16px 'Microsoft YaHei',Arial}.tiny{fill:#66806b;font:14px 'Microsoft YaHei',Arial}.mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}.arrow-r{stroke:#e97f9a;stroke-width:3;marker-end:url(#arrow-rose)}.arrow-g{stroke:#4da146;stroke-width:3;marker-end:url(#arrow-green)}
+    </style>
+  </defs>
+  <rect class="bg" width="720" height="360" rx="24"/>
+  <text class="label" x="32" y="46">TPS：φ + D1 + D2 独立调节</text>
+  <text class="small" x="32" y="74">外移相定功率方向，两侧等效脉宽分别细调。</text>
+  <line class="axis" x1="120" y1="132" x2="682" y2="132"/>
+  <line class="axis" x1="120" y1="204" x2="682" y2="204"/>
+  <line class="axis" x1="120" y1="276" x2="682" y2="276"/>
+  <line class="tick" x1="204" y1="104" x2="204" y2="290"/>
+  <line class="tick" x1="316" y1="104" x2="316" y2="290"/>
+  <line class="tick" x1="428" y1="104" x2="428" y2="290"/>
+  <line class="tick" x1="540" y1="104" x2="540" y2="290"/>
+  <text class="label" x="34" y="139">v11</text>
+  <text class="label" x="34" y="211">v22</text>
+  <text class="label" x="34" y="283">iL</text>
+  <path class="base" d="M128 104 H240 V160 H352 V104 H464 V160 H576 V104 H680"/>
+  <path class="base" d="M128 232 H300 V176 H412 V232 H524 V176 H636 V232 H680"/>
+  <path class="v1" d="M128 160 H188 V104 H328 V160 H420 V104 H560 V160 H680"/>
+  <path class="v2" d="M128 232 H270 V176 H382 V232 H494 V176 H606 V232 H680"/>
+  <path class="i" d="M128 276 C188 244 250 226 320 276 S442 326 508 276 S608 238 680 264"/>
+  <line class="mark" x1="188" y1="96" x2="188" y2="166"/>
+  <line class="mark" x1="240" y1="96" x2="240" y2="166"/>
+  <line class="arrow-r" x1="194" y1="92" x2="234" y2="92"/>
+  <text class="tiny" x="246" y="98">D1</text>
+  <line class="mark" x1="270" y1="168" x2="270" y2="238"/>
+  <line class="mark" x1="300" y1="168" x2="300" y2="238"/>
+  <line class="arrow-r" x1="276" y1="242" x2="294" y2="242"/>
+  <text class="tiny" x="308" y="247">D2</text>
+  <line class="mark" x1="328" y1="96" x2="328" y2="238"/>
+  <line class="mark" x1="382" y1="96" x2="382" y2="238"/>
+  <line class="arrow-g" x1="336" y1="88" x2="374" y2="88"/>
+  <text class="tiny" x="388" y="93">φ</text>
+  <text class="tiny" x="32" y="332">直观理解：三个自由度分工，适合宽电压范围、低压大电流和软开关窗口优化。</text>
+</svg>

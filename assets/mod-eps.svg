@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">EPS 扩展移相概念图</title>
+  <desc id="desc">EPS 在外移相 phi 之外，只开放一侧桥内移相来改变单侧等效脉宽。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#e97f9a"/></marker>
+    <style>
+      .bg{fill:#fbfff9}.axis{stroke:#b7d5b5;stroke-width:1.5}.tick{stroke:#e0eedc;stroke-width:1}.v1{stroke:#23823b;stroke-width:5;fill:none;stroke-linejoin:round}.v2{stroke:#d89416;stroke-width:5;fill:none;stroke-linejoin:round}.base{stroke:#97d28e;stroke-width:3;fill:none;stroke-dasharray:9 7}.i{stroke:#3aa7b4;stroke-width:4;fill:none}.label{fill:#17331f;font:800 23px 'Microsoft YaHei',Arial}.small{fill:#55715d;font:16px 'Microsoft YaHei',Arial}.tiny{fill:#66806b;font:14px 'Microsoft YaHei',Arial}.mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}.arrow{stroke:#e97f9a;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="720" height="360" rx="24"/>
+  <text class="label" x="32" y="46">EPS：φ + 单侧内移相</text>
+  <text class="small" x="32" y="74">只改变一侧全桥等效脉宽，另一侧保持固定 50% 方波。</text>
+  <line class="axis" x1="120" y1="132" x2="682" y2="132"/>
+  <line class="axis" x1="120" y1="204" x2="682" y2="204"/>
+  <line class="axis" x1="120" y1="276" x2="682" y2="276"/>
+  <line class="tick" x1="204" y1="104" x2="204" y2="290"/>
+  <line class="tick" x1="316" y1="104" x2="316" y2="290"/>
+  <line class="tick" x1="428" y1="104" x2="428" y2="290"/>
+  <line class="tick" x1="540" y1="104" x2="540" y2="290"/>
+  <text class="label" x="34" y="139">v11</text>
+  <text class="label" x="34" y="211">v22</text>
+  <text class="label" x="34" y="283">iL</text>
+  <path class="base" d="M128 104 H240 V160 H352 V104 H464 V160 H576 V104 H680"/>
+  <path class="v1" d="M128 160 H188 V104 H316 V160 H412 V104 H540 V160 H680"/>
+  <path class="v2" d="M128 232 H300 V176 H412 V232 H524 V176 H636 V232 H680"/>
+  <path class="i" d="M128 276 C182 236 246 224 306 276 S418 322 476 276 S586 232 680 264"/>
+  <line class="mark" x1="188" y1="96" x2="188" y2="166"/>
+  <line class="mark" x1="240" y1="96" x2="240" y2="166"/>
+  <line class="arrow" x1="194" y1="92" x2="234" y2="92"/>
+  <text class="small" x="252" y="98">单侧内移相：改变 v11 脉宽</text>
+  <text class="tiny" x="32" y="332">直观理解：仍用 φ 决定功率方向，再用一侧脉宽修电流；比 SPS 灵活，比 TPS 简单。</text>
+</svg>

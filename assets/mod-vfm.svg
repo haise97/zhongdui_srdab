@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">VFM 变频调制概念图</title>
+  <desc id="desc">VFM 改变开关频率相对谐振频率的位置，从而改变谐振腔等效阻抗和传输能力。</desc>
+  <style>
+    .bg{fill:#fbfff9}.axis{stroke:#b7d5b5;stroke-width:2}.curve{stroke:#3aa7b4;stroke-width:5;fill:none}.mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}.label{fill:#17331f;font:800 23px 'Microsoft YaHei',Arial}.small{fill:#55715d;font:16px 'Microsoft YaHei',Arial}.tiny{fill:#66806b;font:14px 'Microsoft YaHei',Arial}.tag{fill:#e8f8e1;stroke:#b9dfb6;stroke-width:1.4}.tag2{fill:#fff7e3;stroke:#f0c76f;stroke-width:1.4}
+  </style>
+  <rect class="bg" width="720" height="360" rx="24"/>
+  <text class="label" x="32" y="46">VFM：改变频率，调谐振腔阻抗</text>
+  <text class="small" x="32" y="74">频率越接近串联谐振点，支路等效阻抗越小，传输能力越强。</text>
+  <line class="axis" x1="96" y1="260" x2="660" y2="260"/>
+  <line class="axis" x1="112" y1="92" x2="112" y2="276"/>
+  <text class="small" x="602" y="292">频率 f</text>
+  <text class="small" x="34" y="104">传输能力</text>
+  <path class="curve" d="M118 252 C190 240 232 210 276 130 S370 70 430 130 S526 230 650 252"/>
+  <line class="mark" x1="356" y1="82" x2="356" y2="268"/>
+  <text class="small" x="330" y="76">fr</text>
+  <rect class="tag" x="180" y="286" width="170" height="34" rx="17"/>
+  <text class="tiny" x="202" y="308">靠近 fr：传输强</text>
+  <rect class="tag2" x="390" y="286" width="190" height="34" rx="17"/>
+  <text class="tiny" x="412" y="308">远离 fr：传输弱</text>
+  <text class="tiny" x="32" y="332">直观理解：VFM 不改变相移自由度本身，而是改变谐振腔的“通畅程度”。</text>
+</svg>
