@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" role="img" aria-labelledby="title desc">
+  <title id="title">SR-DAB 闭环控制框图</title>
+  <desc id="desc">ADC采样、信号处理、状态机、PI调节、相位命令和HRTIM输出构成闭环控制。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#55a84b"/>
+    </marker>
+    <style>
+      .bg{fill:#fbfff9}.card{fill:#fff;stroke:#b9dfb6;stroke-width:2}.label{fill:#17331f;font:800 20px 'Microsoft YaHei',Arial}.text{fill:#66806b;font:16px 'Microsoft YaHei',Arial}.line{stroke:#55a84b;stroke-width:3;fill:none;marker-end:url(#arrow)}.safe{fill:#fff7e3;stroke:#f2ad2e;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="420" rx="24"/>
+  <text class="label" x="44" y="54">我在代码里采用的分层闭环</text>
+
+  <g transform="translate(46 105)">
+    <rect class="card" width="150" height="92" rx="16"/>
+    <text class="label" x="26" y="38">ADC 采样</text>
+    <text class="text" x="22" y="66">A/B 电压电流</text>
+  </g>
+  <path class="line" d="M205 151 H285"/>
+  <g transform="translate(296 105)">
+    <rect class="card" width="170" height="92" rx="16"/>
+    <text class="label" x="28" y="38">信号处理</text>
+    <text class="text" x="22" y="66">拟合、滤波、限斜率</text>
+  </g>
+  <path class="line" d="M476 151 H556"/>
+  <g transform="translate(568 105)">
+    <rect class="card" width="160" height="92" rx="16"/>
+    <text class="label" x="35" y="38">状态机</text>
+    <text class="text" x="22" y="66">预充/恒流/恒压</text>
+  </g>
+  <path class="line" d="M738 151 H818"/>
+  <g transform="translate(830 105)">
+    <rect class="card" width="110" height="92" rx="16"/>
+    <text class="label" x="32" y="38">PI</text>
+    <text class="text" x="18" y="66">生成目标</text>
+  </g>
+
+  <path class="line" d="M885 205 V255 H690"/>
+  <g transform="translate(500 244)">
+    <rect class="card" width="178" height="104" rx="16"/>
+    <text class="label" x="28" y="38">相位命令</text>
+    <text class="text" x="20" y="66">主移相 + 左/右内移相</text>
+    <text class="text" x="20" y="88">频率接口可扩展</text>
+  </g>
+  <path class="line" d="M490 296 H370"/>
+  <g transform="translate(210 244)">
+    <rect class="card" width="150" height="104" rx="16"/>
+    <text class="label" x="34" y="38">HRTIM</text>
+    <text class="text" x="22" y="66">四桥臂互补PWM</text>
+  </g>
+  <path class="line" d="M200 296 H110 V205"/>
+
+  <g transform="translate(760 244)">
+    <rect class="safe" width="180" height="104" rx="16"/>
+    <text class="label" x="28" y="38">保护逻辑</text>
+    <text class="text" x="20" y="66">过压/过流/ADC失效</text>
+    <text class="text" x="20" y="88">故障锁存关PWM</text>
+  </g>
+  <path class="line" d="M760 296 H690"/>
+</svg>

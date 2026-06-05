@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 360" role="img" aria-labelledby="title desc">
+  <title id="title">完成题目的思路流程</title>
+  <desc id="desc">从读题、拆端口、理解拓扑、选择调制、写控制代码到测试展示的项目过程。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#55a84b"/>
+    </marker>
+    <style>
+      .bg{fill:#fbfff9}.card{fill:#fff;stroke:#b9dfb6;stroke-width:2}.num{fill:#55a84b;font:800 22px 'Microsoft YaHei',Arial}.title{fill:#17331f;font:800 21px 'Microsoft YaHei',Arial}.text{fill:#66806b;font:16px 'Microsoft YaHei',Arial}.line{stroke:#55a84b;stroke-width:3;fill:none;marker-end:url(#arrow)}.dot{fill:#e9f8e6;stroke:#55a84b;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="360" rx="24"/>
+  <path class="line" d="M150 180 C245 95, 345 95, 440 180"/>
+  <path class="line" d="M440 180 C535 265, 635 265, 730 180"/>
+  <path class="line" d="M730 180 C790 130, 850 130, 910 180"/>
+
+  <g transform="translate(50 82)">
+    <rect class="card" width="210" height="132" rx="18"/>
+    <circle class="dot" cx="34" cy="34" r="20"/><text class="num" x="27" y="42">1</text>
+    <text class="title" x="68" y="42">读题拆边界</text>
+    <text class="text" x="24" y="78">先分清 A/B 端口、电压</text>
+    <text class="text" x="24" y="102">范围、三种工作场景。</text>
+  </g>
+  <g transform="translate(330 82)">
+    <rect class="card" width="210" height="132" rx="18"/>
+    <circle class="dot" cx="34" cy="34" r="20"/><text class="num" x="27" y="42">2</text>
+    <text class="title" x="68" y="42">理解能量路</text>
+    <text class="text" x="24" y="78">有源桥输出方波，谐振</text>
+    <text class="text" x="24" y="102">腔和变压器传递功率。</text>
+  </g>
+  <g transform="translate(610 82)">
+    <rect class="card" width="210" height="132" rx="18"/>
+    <circle class="dot" cx="34" cy="34" r="20"/><text class="num" x="27" y="42">3</text>
+    <text class="title" x="68" y="42">选择调制量</text>
+    <text class="text" x="24" y="78">先用主移相定方向，再</text>
+    <text class="text" x="24" y="102">用内移相做细调。</text>
+  </g>
+  <g transform="translate(190 236)">
+    <rect class="card" width="250" height="92" rx="18"/>
+    <text class="title" x="24" y="38">写状态机和闭环</text>
+    <text class="text" x="24" y="64">预充、恒流、恒压、保护分层。</text>
+  </g>
+  <g transform="translate(540 236)">
+    <rect class="card" width="250" height="92" rx="18"/>
+    <text class="title" x="24" y="38">测试并做网站复盘</text>
+    <text class="text" x="24" y="64">把思路、代码和题目要求讲清楚。</text>
+  </g>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 420" role="img" aria-labelledby="title desc">
+  <title id="title">DAB 移相调制原理波形</title>
+  <desc id="desc">用左桥方波、右桥方波、主移相、内移相和谐振电流示意 DAB 调制原理。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#55a84b"/>
+    </marker>
+    <style>
+      .bg{fill:#fbfff9}.axis{stroke:#a9c9a7;stroke-width:2}.wave1{stroke:#4da146;stroke-width:5;fill:none;stroke-linejoin:round}.wave2{stroke:#f2ad2e;stroke-width:5;fill:none;stroke-linejoin:round}.wave3{stroke:#42a9b7;stroke-width:4;fill:none}.label{fill:#17331f;font:800 20px 'Microsoft YaHei',Arial}.small{fill:#66806b;font:16px 'Microsoft YaHei',Arial}.arrow{stroke:#55a84b;stroke-width:3;marker-end:url(#arrow)}.mark{stroke:#e97f9a;stroke-width:2;stroke-dasharray:7 7}.box{fill:#fff;stroke:#b9dfb6;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="420" rx="24"/>
+  <rect class="box" x="34" y="30" width="912" height="340" rx="18"/>
+  <text class="label" x="58" y="70">移相调制的直观理解</text>
+  <text class="small" x="58" y="100">主移相决定两桥方波谁领先，内移相改变单桥等效脉宽，谐振电流跟随电压差变化。</text>
+
+  <line class="axis" x1="170" y1="155" x2="900" y2="155"/>
+  <line class="axis" x1="170" y1="235" x2="900" y2="235"/>
+  <line class="axis" x1="170" y1="315" x2="900" y2="315"/>
+  <text class="label" x="58" y="162">左桥方波</text>
+  <text class="label" x="58" y="242">右桥方波</text>
+  <text class="label" x="58" y="322">谐振电流</text>
+
+  <path class="wave1" d="M180 130 H300 V180 H430 V130 H560 V180 H690 V130 H820 V180 H900"/>
+  <path class="wave2" d="M180 260 H350 V210 H480 V260 H610 V210 H740 V260 H870 V210 H900"/>
+  <path class="wave3" d="M180 315 C230 270 280 270 330 315 S430 360 480 315 S580 270 630 315 S730 360 780 315 S870 270 900 300"/>
+
+  <line class="mark" x1="300" y1="118" x2="300" y2="270"/>
+  <line class="mark" x1="350" y1="118" x2="350" y2="270"/>
+  <line class="arrow" x1="304" y1="112" x2="346" y2="112"/>
+  <text class="small" x="360" y="118">主移相 φ：控制功率方向和粗功率</text>
+
+  <line class="mark" x1="430" y1="118" x2="430" y2="195"/>
+  <line class="mark" x1="560" y1="118" x2="560" y2="195"/>
+  <line class="arrow" x1="436" y1="198" x2="554" y2="198"/>
+  <text class="small" x="575" y="204">桥内移相：改变等效脉宽</text>
+
+  <text class="small" x="58" y="394">本工程把 φ 拆成 main_phase_deg、left_inner_deg、right_inner_deg 三个可调量。</text>
+</svg>

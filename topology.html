@@ -14,6 +14,7 @@
     <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主导航">
       <a href="index.html" data-nav="home">首页</a>
+      <a href="process.html" data-nav="process">过程</a>
       <a href="task.html" data-nav="task">题目</a>
       <a href="topology.html" data-nav="topology">拓扑</a>
       <a href="modulation.html" data-nav="modulation">调制</a>
@@ -25,7 +26,7 @@
     <section class="page-hero">
       <p class="section-kicker">Power Stage</p>
       <h1>主电路拓扑</h1>
-      <p>SR-DAB 由两个有源桥、串联谐振腔和高频隔离变压器组成。桥臂产生高频方波，谐振腔承担电流塑形，变压器完成隔离与变比匹配。</p>
+      <p>我理解这张图时，先把它看成“两台可以互相逆变/整流的桥”，中间用串联谐振腔和高频变压器连接。这样就能解释为什么它既能 A 到 B，也能 B 到 A。</p>
     </section>
 
     <section class="section">
@@ -34,10 +35,10 @@
         <figcaption>高清重绘版：突出 A/B 端口、两侧有源桥、Lr-Cr 谐振腔、隔离变压器和双向能量流。</figcaption>
       </figure>
       <div class="topology-grid">
-        <article><b>左侧有源桥</b><span>HRTIM A/B 输出互补 PWM，形成 A 侧高频方波电压。</span></article>
-        <article><b>串联谐振腔</b><span>Lr 与 Cr 限制电流斜率，配合移相控制改善软开关条件。</span></article>
-        <article><b>隔离变压器</b><span>满足题目要求的功率隔离传输，同时用于电压等级匹配。</span></article>
-        <article><b>右侧有源桥</b><span>根据功率方向工作在同步整流或逆变状态，B 侧电压电流参与闭环。</span></article>
+        <article><b>左侧有源桥</b><span>把 A 侧直流电压变成高频方波。对我来说，它是“能量入口”或“能量出口”，取决于主移相方向。</span></article>
+        <article><b>串联谐振腔</b><span>Lr 与 Cr 不是装饰件，而是电流通道。它让电流变化更可控，也给软开关留下空间。</span></article>
+        <article><b>隔离变压器</b><span>题目明确要求功率隔离传输，所以变压器既是安全隔离，也是低压大电流匹配的核心。</span></article>
+        <article><b>右侧有源桥</b><span>B 侧面对的是 3V-4.2V 锂电范围，电流不小，因此同步整流、采样和闭环判断都很关键。</span></article>
       </div>
     </section>
 

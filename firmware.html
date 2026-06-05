@@ -14,6 +14,7 @@
     <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主导航">
       <a href="index.html" data-nav="home">首页</a>
+      <a href="process.html" data-nav="process">过程</a>
       <a href="task.html" data-nav="task">题目</a>
       <a href="topology.html" data-nav="topology">拓扑</a>
       <a href="modulation.html" data-nav="modulation">调制</a>
@@ -25,7 +26,7 @@
     <section class="page-hero">
       <p class="section-kicker">Firmware</p>
       <h1>STM32G474 工程结构</h1>
-      <p>工程目录为 <code>SR_DAB</code>，核心外设包括 HRTIM、ADC1-ADC4、DMA、USART、TIM16、LCD 和 16 键输入。</p>
+      <p>工程目录为 <code>SR_DAB</code>。我把它拆成板级启动、PWM、ADC 处理、TPS 状态机、显示、按键和串口工具几个模块，这样网站里的讲解能和真实代码对应上。</p>
     </section>
 
     <section class="section">

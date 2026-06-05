@@ -30,7 +30,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 if (canvas && !reduceMotion.matches) {
   const ctx = canvas.getContext("2d");
-  const colors = ["#69c75f", "#8de59d", "#f2ad2e", "#e97f9a", "#42a9b7"];
+  const colors = ["#5fb653", "#8de59d", "#f2ad2e", "#e97f9a", "#42a9b7", "#b6e27b"];
   let width = 0;
   let height = 0;
   let particles = [];
@@ -46,18 +46,19 @@ if (canvas && !reduceMotion.matches) {
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = Math.min(58, Math.max(28, Math.floor(width / 28)));
+    const count = Math.min(86, Math.max(42, Math.floor(width / 20)));
     particles = Array.from({ length: count }, (_, index) => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: 3 + Math.random() * 10,
+      size: 5 + Math.random() * 17,
       color: colors[index % colors.length],
-      speed: 0.18 + Math.random() * 0.45,
-      drift: -0.18 + Math.random() * 0.36,
+      speed: 0.12 + Math.random() * 0.58,
+      drift: -0.34 + Math.random() * 0.68,
       rotation: Math.random() * Math.PI,
-      spin: -0.012 + Math.random() * 0.024,
-      type: Math.random() > 0.58 ? "leaf" : "dot",
-      alpha: 0.16 + Math.random() * 0.34
+      spin: -0.018 + Math.random() * 0.036,
+      type: Math.random() > 0.22 ? "leaf" : "dot",
+      alpha: 0.2 + Math.random() * 0.38,
+      sway: 0.4 + Math.random() * 1.4
     }));
   };
 
@@ -93,7 +94,7 @@ if (canvas && !reduceMotion.matches) {
     ctx.clearRect(0, 0, width, height);
     particles.forEach((p) => {
       p.y += p.speed;
-      p.x += p.drift + Math.sin((p.y + p.size) * 0.012) * 0.18;
+      p.x += p.drift + Math.sin((p.y + p.size) * 0.014) * p.sway;
       p.rotation += p.spin;
 
       if (p.y > height + 30) {

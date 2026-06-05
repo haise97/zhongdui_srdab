@@ -20,6 +20,7 @@
     </button>
     <nav class="site-nav" id="siteNav" aria-label="主导航">
       <a href="index.html" data-nav="home">首页</a>
+      <a href="process.html" data-nav="process">过程</a>
       <a href="task.html" data-nav="task">题目</a>
       <a href="topology.html" data-nav="topology">拓扑</a>
       <a href="modulation.html" data-nav="modulation">调制</a>
@@ -33,7 +34,7 @@
       <div class="hero-badge">2026 电赛题目整理 · 隔离双向变换 · STM32G474</div>
       <h1>串联谐振有源双桥试验装置</h1>
       <p class="hero-subtitle">
-        把 B 题要求、SR-DAB 拓扑、三重移相调制、闭环控制策略和本地固件工程整理成一个可公开访问的项目作品站。
+        这是我作为学生完成 B 题后的项目复盘：从读题、理解 SR-DAB、查调制资料、写控制代码，到最后把整个过程做成一个可公开访问的网站。
       </p>
       <div class="hero-actions">
         <a class="button primary" href="topology.html">看拓扑</a>
@@ -65,18 +66,18 @@
       <div class="audit-grid">
         <article>
           <span>01</span>
-          <h3>信息过密</h3>
-          <p>原来所有内容挤在一个长页面里，适合查资料，但不适合展示。现在拆成六个入口，手机上可以按主题阅读。</p>
+          <h3>叙事不够像项目复盘</h3>
+          <p>原来更像资料整理。现在改成学生完成题目的路线：先讲我怎么理解，再讲拓扑、调制、控制和工程。</p>
         </article>
         <article>
           <span>02</span>
-          <h3>视觉记忆点弱</h3>
-          <p>新增动态能量场背景、首页关键指标和主题入口，让别人打开链接第一眼能知道这是一个 SR-DAB 作品。</p>
+          <h3>动态氛围不明显</h3>
+          <p>新增更明显的漂浮叶片和光点，让页面打开后有“作品展示”的第一印象，同时保持技术站点的清爽。</p>
         </article>
         <article>
           <span>03</span>
-          <h3>工程脉络不够清楚</h3>
-          <p>把题目、拓扑、调制、控制和代码工程拆开讲，减少“看完拓扑又找不到控制策略”的跳读成本。</p>
+          <h3>原理辅助图不足</h3>
+          <p>补充自绘流程图、移相波形图和控制框图，不直接搬网上图片，避免版权和风格不统一。</p>
         </article>
       </div>
     </section>
@@ -90,6 +91,10 @@
         <p>建议先看题目边界，再看拓扑和调制方式，最后进入控制策略与固件代码。这样读起来更接近真实项目答辩逻辑。</p>
       </div>
       <div class="route-grid">
+        <a class="route-card" href="process.html">
+          <b>完成过程</b>
+          <span>以学生视角复盘读题、查资料、定方案、写代码和调试的全过程。</span>
+        </a>
         <a class="route-card" href="task.html">
           <b>题目任务</b>
           <span>三类工况、端口电压范围、电流设定与截止电压。</span>
@@ -130,6 +135,21 @@
         <span>Lr-Cr 串联谐振</span>
         <span>高频隔离变压器</span>
         <span>B 侧单节锂电范围</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">References</p>
+          <h2>我查资料时主要确认的方向</h2>
+        </div>
+        <p>网站里的原理图是自绘的，公开资料主要用来确认 DAB/SR-DAB 调制思路和 STM32G4 HRTIM 适合做高分辨率互补 PWM。</p>
+      </div>
+      <div class="source-panel">
+        <p>我没有把网上图片直接复制进页面，而是把查到的资料消化成自己的框图和解释，这样更像项目复盘，也更安全。</p>
+        <a href="https://www.st.com/resource/en/application_note/an5496-bidirectional-dcdc-converter-for-microgrid-applications-stmicroelectronics.pdf">ST AN5496 双向 DC/DC 参考</a>
+        <a href="https://wiki.stmicroelectronics.cn/stm32mcu/wiki/Getting_started_with_HRTIM">STM32 HRTIM 入门资料</a>
       </div>
     </section>
   </main>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>完成过程 | zhongdui_srdab</title>
+  <meta name="description" content="以学生视角复盘完成 B 题串联谐振有源双桥试验装置的理解、设计、实现和调试过程。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="process">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">ZD</span><span>zhongdui_srdab</span></a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="process.html" data-nav="process">过程</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero story-hero">
+      <p class="section-kicker">Student Journey</p>
+      <h1>我是怎么理解并完成这道题的</h1>
+      <p>
+        这个网站不是只把题目复制一遍，而是把我作为学生完成 SR-DAB 试验装置时的思考路径讲出来：
+        先读懂题目，再把电源拓扑、调制方式、控制状态机和固件工程连成一条线。
+      </p>
+    </section>
+
+    <section class="section">
+      <figure class="showcase-figure">
+        <img src="assets/journey-flow.svg" alt="完成题目的思路流程图">
+        <figcaption>从读题到网站复盘的完成路线。每一步都对应后面一个页面的技术内容。</figcaption>
+      </figure>
+    </section>
+
+    <section class="section highlight-band">
+      <div class="timeline">
+        <article>
+          <span>01</span>
+          <h2>先把题目翻译成工程指标</h2>
+          <p>我先没有急着写 PWM，而是把题目拆成 A 侧、B 侧和三种开关组合。A 侧是 10V-15V 铅酸范围，B 侧是 3V-4.2V 锂电范围；真正要控制的是电流、截止电压和功率方向。</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>再确认为什么必须用双向隔离拓扑</h2>
+          <p>题目要求功率由变压器隔离传输，且前后两级通信也要隔离。DAB/SR-DAB 的两个有源桥正好适合双向能量流，串联谐振腔则帮助限制电流并改善软开关条件。</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>从单移相理解到三重移相</h2>
+          <p>我先用单移相理解“相位差决定功率方向”，再意识到低压大电流场景只靠一个移相角不够细。于是工程里把主移相、左桥内移相、右桥内移相拆开控制。</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h2>最后把控制拆成状态机和任务模块</h2>
+          <p>固件不是一个巨大的 while 循环，而是 ADC 采样、信号处理、TPS 状态机、HRTIM 输出、LCD 显示和串口工具分层。这样出问题时能知道是采样、判断还是输出环节出了问题。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">What I Learned</p>
+          <h2>这个题让我真正意识到的难点</h2>
+        </div>
+        <p>低压大电流题目看上去电压不高，但控制和工程细节一点都不轻松。采样噪声、相位分辨率、软开关窗口、保护边界和人机交互都会影响最终效果。</p>
+      </div>
+      <div class="lesson-grid">
+        <article><b>不是能亮波形就算完成</b><span>题目要的是可设电流、截止电压和状态显示，必须闭环。</span></article>
+        <article><b>调制方式要服务于电流控制</b><span>SPS 能解释方向，但 TPS 更适合宽电压比和细电流调节。</span></article>
+        <article><b>软件结构决定调试效率</b><span>采样、处理、状态机和 PWM 输出分层后，现场调试更容易定位。</span></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span>zhongdui_srdab · 完成过程</span><a href="task.html">下一页：题目</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

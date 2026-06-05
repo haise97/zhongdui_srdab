@@ -14,6 +14,7 @@
     <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="site-nav" id="siteNav" aria-label="主导航">
       <a href="index.html" data-nav="home">首页</a>
+      <a href="process.html" data-nav="process">过程</a>
       <a href="task.html" data-nav="task">题目</a>
       <a href="topology.html" data-nav="topology">拓扑</a>
       <a href="modulation.html" data-nav="modulation">调制</a>
@@ -25,7 +26,14 @@
     <section class="page-hero">
       <p class="section-kicker">Modulation</p>
       <h1>从单移相到三重移相</h1>
-      <p>调制方式决定两个桥输出方波之间的相位关系，也决定谐振腔电流、软开关窗口和双向功率控制的细腻程度。</p>
+      <p>我一开始只理解“两个方波错开一点就能传功率”。后面才发现，低压大电流场景里只靠一个移相角不够细，所以需要把主移相和桥内移相分开看。</p>
+    </section>
+
+    <section class="section">
+      <figure class="showcase-figure">
+        <img src="assets/phase-shift-principle.svg" alt="DAB 移相调制原理波形图">
+        <figcaption>自绘波形图：先用主移相理解功率方向，再用桥内移相理解等效脉宽和电流细调。</figcaption>
+      </figure>
     </section>
 
     <section class="section">
@@ -33,7 +41,7 @@
         <article class="mod-card">
           <span class="pill">SPS</span>
           <h2>单移相</h2>
-          <p>两侧全桥保持 50% 占空比，只改变原边与副边方波的主移相角。主移相越大，传输功率越大；符号反向时，功率方向反向。</p>
+          <p>两侧全桥保持 50% 占空比，只改变原边与副边方波的主移相角。这个方式最适合理解“相位差为什么能控制双向功率”。</p>
           <div class="wave-stack" aria-hidden="true"><i></i><i></i></div>
           <p class="note">优点是实现简单；缺点是在宽电压比和轻载时环流较大，低功率控制分辨率不足。</p>
         </article>
@@ -46,7 +54,7 @@
         <article class="mod-card important">
           <span class="pill cyan">TPS</span>
           <h2>三重移相</h2>
-          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。</p>
+          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。我把它理解成“一个方向旋钮 + 两个细调旋钮”。</p>
           <ul>
             <li>主移相：决定主要功率方向和粗调电流。</li>
             <li>左桥内移相：参与左侧等效脉宽与细调。</li>
@@ -81,6 +89,11 @@
         <div role="row"><b role="cell">左桥内移相</b><span role="cell"><code>left_inner_deg</code></span><em role="cell">左桥等效脉宽、细调</em></div>
         <div role="row"><b role="cell">右桥内移相</b><span role="cell"><code>right_inner_deg</code></span><em role="cell">右桥等效脉宽、精细校正</em></div>
         <div role="row"><b role="cell">频率</b><span role="cell"><code>PWM_SR_DAB_SetFrequencyHz()</code></span><em role="cell">10kHz-100kHz 可扩展控制量</em></div>
+      </div>
+      <div class="reference-panel">
+        <h3>我参考后形成的理解</h3>
+        <p>公开资料中，DAB 常见控制会从单移相扩展到双移相、三重移相，以降低环流、扩展软开关范围并改善宽电压比工况。本项目没有直接照搬公式，而是把这种思想落到三个相位变量和三个 TPS 状态机里。</p>
+        <a href="https://www.st.com/resource/en/application_note/an5496-bidirectional-dcdc-converter-for-microgrid-applications-stmicroelectronics.pdf">ST AN5496：双向 DC/DC 与 HRTIM 应用参考</a>
       </div>
     </section>
   </main>
