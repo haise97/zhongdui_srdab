@@ -40,6 +40,22 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Execution Path</p>
+          <h2>主程序实际怎么跑</h2>
+        </div>
+        <p>这部分是我把“网页讲解”和“真实代码”连起来的关键。主循环不是只负责一个功能，而是把串口、按键、LCD、ADC 和控制任务持续调度起来。</p>
+      </div>
+      <div class="pipeline">
+        <article><span>1</span><b>外设初始化</b><p>CubeMX 生成 GPIO、DMA、ADC1-4、USART1、HRTIM1、TIM16 初始化。</p></article>
+        <article><span>2</span><b>板级启动</b><p><code>SR_DAB_Board_Start()</code> 启动 ADC DMA、HRTIM 控制、中断和空载 PWM。</p></article>
+        <article><span>3</span><b>循环任务</b><p>串口、按键、LCD、ADC 任务在 while 循环中持续运行。</p></article>
+        <article><span>4</span><b>控制输出</b><p>TPS 状态机生成相位命令，PWM 模块把命令变成互补 HRTIM 波形。</p></article>
+      </div>
+    </section>
+
     <section class="section highlight-band">
       <div class="section-head split">
         <div>

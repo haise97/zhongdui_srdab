@@ -56,9 +56,11 @@ if (canvas && !reduceMotion.matches) {
       drift: -0.34 + Math.random() * 0.68,
       rotation: Math.random() * Math.PI,
       spin: -0.018 + Math.random() * 0.036,
-      type: Math.random() > 0.22 ? "leaf" : "dot",
+      type: Math.random() > 0.14 ? "leaf" : "dot",
       alpha: 0.2 + Math.random() * 0.38,
-      sway: 0.4 + Math.random() * 1.4
+      sway: 0.4 + Math.random() * 1.4,
+      squash: 0.38 + Math.random() * 0.32,
+      layer: Math.random() > 0.72 ? 1.35 : 1
     }));
   };
 
@@ -69,13 +71,13 @@ if (canvas && !reduceMotion.matches) {
     ctx.globalAlpha = p.alpha;
     ctx.fillStyle = p.color;
     ctx.beginPath();
-    ctx.ellipse(0, 0, p.size * 1.6, p.size * 0.58, 0, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, p.size * 1.75 * p.layer, p.size * p.squash, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.strokeStyle = "rgba(255,255,255,0.55)";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(-p.size * 1.1, 0);
-    ctx.lineTo(p.size * 1.1, 0);
+    ctx.moveTo(-p.size * 1.15 * p.layer, 0);
+    ctx.lineTo(p.size * 1.15 * p.layer, 0);
     ctx.stroke();
     ctx.restore();
   };
@@ -93,7 +95,7 @@ if (canvas && !reduceMotion.matches) {
   const tick = () => {
     ctx.clearRect(0, 0, width, height);
     particles.forEach((p) => {
-      p.y += p.speed;
+      p.y += p.speed * p.layer;
       p.x += p.drift + Math.sin((p.y + p.size) * 0.014) * p.sway;
       p.rotation += p.spin;
 

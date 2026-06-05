@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" role="img" aria-labelledby="title desc">
+  <title id="title">SR-DAB 双向能量流</title>
+  <desc id="desc">A侧到B侧充电，以及B侧到A侧反向供能的两种能量路径。</desc>
+  <defs>
+    <marker id="greenArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#55a84b"/>
+    </marker>
+    <marker id="goldArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10Z" fill="#f2ad2e"/>
+    </marker>
+    <style>
+      .bg{fill:#fbfff9}.card{fill:#fff;stroke:#b9dfb6;stroke-width:2}.node{fill:#eaf8e5;stroke:#55a84b;stroke-width:2}.node2{fill:#fff6df;stroke:#f2ad2e;stroke-width:2}.title{fill:#17331f;font:800 22px 'Microsoft YaHei',Arial}.text{fill:#66806b;font:16px 'Microsoft YaHei',Arial}.flow1{stroke:#55a84b;stroke-width:5;fill:none;marker-end:url(#greenArrow)}.flow2{stroke:#f2ad2e;stroke-width:5;fill:none;marker-end:url(#goldArrow)}.thin{stroke:#9cc99b;stroke-width:2;fill:none}.label{fill:#17331f;font:800 18px 'Microsoft YaHei',Arial}
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="430" rx="24"/>
+  <text class="title" x="42" y="54">两种能量方向对应两种控制判断</text>
+  <text class="text" x="42" y="84">我把题目的三类工况先简化成 A→B 和 B→A 两条功率路径，再分别写状态机。</text>
+
+  <g transform="translate(42 125)">
+    <rect class="card" width="896" height="110" rx="18"/>
+    <rect class="node" x="28" y="28" width="128" height="54" rx="12"/><text class="label" x="58" y="62">A 侧</text>
+    <rect class="node" x="250" y="28" width="128" height="54" rx="12"/><text class="label" x="278" y="62">左桥</text>
+    <rect class="node" x="470" y="28" width="150" height="54" rx="12"/><text class="label" x="492" y="62">谐振+变压器</text>
+    <rect class="node" x="705" y="28" width="128" height="54" rx="12"/><text class="label" x="733" y="62">B 侧</text>
+    <path class="flow1" d="M160 55 H240"/>
+    <path class="flow1" d="M382 55 H460"/>
+    <path class="flow1" d="M624 55 H694"/>
+    <text class="text" x="28" y="100">基本要求：A 侧供电，B 侧预充/恒流/恒压充电。</text>
+  </g>
+
+  <g transform="translate(42 270)">
+    <rect class="card" width="896" height="110" rx="18"/>
+    <rect class="node2" x="28" y="28" width="128" height="54" rx="12"/><text class="label" x="58" y="62">A 侧</text>
+    <rect class="node2" x="250" y="28" width="128" height="54" rx="12"/><text class="label" x="278" y="62">左桥</text>
+    <rect class="node2" x="470" y="28" width="150" height="54" rx="12"/><text class="label" x="492" y="62">谐振+变压器</text>
+    <rect class="node2" x="705" y="28" width="128" height="54" rx="12"/><text class="label" x="733" y="62">B 侧</text>
+    <path class="flow2" d="M704 55 H632"/>
+    <path class="flow2" d="M468 55 H390"/>
+    <path class="flow2" d="M248 55 H168"/>
+    <text class="text" x="28" y="100">发挥一/二：B 侧供电或放电，A 侧被充电或承担负载能量。</text>
+  </g>
+</svg>

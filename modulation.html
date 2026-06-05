@@ -60,6 +60,7 @@
             <li>左桥内移相：参与左侧等效脉宽与细调。</li>
             <li>右桥内移相：参与右侧等效脉宽、精细电流校正和软开关窗口。</li>
           </ul>
+          <p class="note">这也是我在工程里最终围绕 TPS 写状态机的原因：题目电压范围宽，B 侧电压低，电流目标又要能设置，单一旋钮不够好用。</p>
         </article>
         <article class="mod-card">
           <span class="pill">EPS</span>
@@ -93,7 +94,23 @@
       <div class="reference-panel">
         <h3>我参考后形成的理解</h3>
         <p>公开资料中，DAB 常见控制会从单移相扩展到双移相、三重移相，以降低环流、扩展软开关范围并改善宽电压比工况。本项目没有直接照搬公式，而是把这种思想落到三个相位变量和三个 TPS 状态机里。</p>
-        <a href="https://www.st.com/resource/en/application_note/an5496-bidirectional-dcdc-converter-for-microgrid-applications-stmicroelectronics.pdf">ST AN5496：双向 DC/DC 与 HRTIM 应用参考</a>
+        <a href="https://www.ti.com/video/6052772079001">TI：Dual Active Bridge 原理视频</a>
+        <a href="https://e-archivo.uc3m.es/entities/publication/2d994c9b-6fbd-4f81-85a9-fc033a703ab8">开放论文：TPS 调制研究</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">How I Decided</p>
+          <h2>我的调制选择逻辑</h2>
+        </div>
+        <p>我不是一开始就直接写 TPS，而是先用 SPS 建立直觉：两个方波错开就能传功率。然后再发现，要满足题目里的预充、恒流和恒压，必须给控制器更多自由度。</p>
+      </div>
+      <div class="lesson-grid">
+        <article><b>第一步：用 SPS 理解方向</b><span>主移相正负号对应能量方向，这帮助我把 A→B 和 B→A 的状态机分开。</span></article>
+        <article><b>第二步：用内移相细调</b><span>内移相改变等效脉宽，适合在接近目标电流时做更小步调整。</span></article>
+        <article><b>第三步：保留频率接口</b><span>工程保留 10kHz-100kHz 频率接口，但当前把 TPS 电流闭环放在主位置。</span></article>
       </div>
     </section>
   </main>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>zhongdui_srdab | SR-DAB 项目展示</title>
-  <meta name="description" content="串联谐振有源双桥试验装置项目展示首页：任务、拓扑、调制、控制与 STM32G474 工程实现。">
+  <title>zhongdui_srdab | 从 B 题到 SR-DAB 试验装置</title>
+  <meta name="description" content="一个学生完成 B 题串联谐振有源双桥试验装置后的全过程项目复盘网站。">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="home">
@@ -31,53 +31,58 @@
 
   <main>
     <section class="hero home-hero">
-      <div class="hero-badge">2026 电赛题目整理 · 隔离双向变换 · STM32G474</div>
-      <h1>串联谐振有源双桥试验装置</h1>
+      <div class="hero-badge">学生项目复盘 · B 题 · 隔离双向电源变换</div>
+      <h1>zhongdui_srdab</h1>
+      <div class="hero-score">SR-DAB</div>
       <p class="hero-subtitle">
-        这是我作为学生完成 B 题后的项目复盘：从读题、理解 SR-DAB、查调制资料、写控制代码，到最后把整个过程做成一个可公开访问的网站。
+        这是我完成“串联谐振有源双桥试验装置”后的完整记录：从读懂题目要求，到理解 DAB/SR-DAB 拓扑，
+        再到选择三重移相控制、写 STM32G474 固件和整理答辩网站。
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="topology.html">看拓扑</a>
-        <a class="button secondary" href="modulation.html">看调制原理</a>
-      </div>
-      <div class="hero-metrics" aria-label="项目核心指标">
-        <article>
-          <strong>10-15V</strong>
-          <span>A 侧铅酸端口</span>
-        </article>
-        <article>
-          <strong>3.0-4.2V</strong>
-          <span>B 侧锂电端口</span>
-        </article>
-        <article>
-          <strong>0.5-3A</strong>
-          <span>B 侧可设电流</span>
-        </article>
-        <article>
-          <strong>TPS</strong>
-          <span>三重移相控制</span>
-        </article>
+        <a class="button primary" href="process.html">看完成过程</a>
+        <a class="button secondary" href="topology.html">看电路拓扑</a>
       </div>
     </section>
 
+    <section class="section narrow intro-card-section">
+      <article class="student-card">
+        <div class="student-avatar">中</div>
+        <div>
+          <p class="section-kicker">Project Identity</p>
+          <h2>这个网站想表达什么</h2>
+          <p>
+            它不是只把 PDF 题目复制一遍，也不是单纯展示代码目录。我的目标是用一个学生的视角讲清楚：
+            拿到题目后我如何拆指标、为什么选择 SR-DAB、为什么需要移相控制，以及工程代码是怎样支撑这些判断的。
+          </p>
+          <div class="chip-row">
+            <span>读题拆指标</span>
+            <span>SR-DAB 拓扑</span>
+            <span>三重移相</span>
+            <span>状态机闭环</span>
+            <span>STM32G474</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
     <section class="section narrow">
-      <p class="section-kicker">Site Audit</p>
-      <h2>这次重构修掉了什么问题</h2>
+      <p class="section-kicker">Design Upgrade</p>
+      <h2>我把网站改成了“项目答辩路线”</h2>
       <div class="audit-grid">
         <article>
           <span>01</span>
-          <h3>叙事不够像项目复盘</h3>
-          <p>原来更像资料整理。现在改成学生完成题目的路线：先讲我怎么理解，再讲拓扑、调制、控制和工程。</p>
+          <h3>先讲我是怎么做的</h3>
+          <p>新增“过程”页面，把读题、查资料、定调制、写状态机和做网站复盘串起来，避免只像技术资料堆叠。</p>
         </article>
         <article>
           <span>02</span>
-          <h3>动态氛围不明显</h3>
-          <p>新增更明显的漂浮叶片和光点，让页面打开后有“作品展示”的第一印象，同时保持技术站点的清爽。</p>
+          <h3>再用图解释关键原理</h3>
+          <p>保留 PDF 原图，新增流程图、移相波形图和闭环控制框图，让非本项目的人也能跟上理解。</p>
         </article>
         <article>
           <span>03</span>
-          <h3>原理辅助图不足</h3>
-          <p>补充自绘流程图、移相波形图和控制框图，不直接搬网上图片，避免版权和风格不统一。</p>
+          <h3>最后对应真实工程文件</h3>
+          <p>每个技术判断都尽量对应到题目要求或代码模块，比如 <code>TPS_0</code>、<code>PWM_SR_DAB</code> 和 ADC 处理层。</p>
         </article>
       </div>
     </section>
@@ -85,35 +90,38 @@
     <section class="section">
       <div class="section-head split">
         <div>
-          <p class="section-kicker">Project Map</p>
-          <h2>从题目到工程实现的浏览路线</h2>
+          <p class="section-kicker">Reading Route</p>
+          <h2>建议按这条路线看</h2>
         </div>
-        <p>建议先看题目边界，再看拓扑和调制方式，最后进入控制策略与固件代码。这样读起来更接近真实项目答辩逻辑。</p>
+        <p>
+          如果把这个网站当作一次项目答辩，顺序应该是：我怎么理解题目、题目要求是什么、拓扑为什么这样、
+          调制怎么控制功率、软件如何实现、工程文件在哪里。
+        </p>
       </div>
       <div class="route-grid">
         <a class="route-card" href="process.html">
           <b>完成过程</b>
-          <span>以学生视角复盘读题、查资料、定方案、写代码和调试的全过程。</span>
+          <span>学生视角复盘：读题、查资料、定方案、写代码、调试和整理网站。</span>
         </a>
         <a class="route-card" href="task.html">
-          <b>题目任务</b>
-          <span>三类工况、端口电压范围、电流设定与截止电压。</span>
+          <b>题目解析</b>
+          <span>把 PDF 要求拆成端口、电压、电流、截止电压、显示和隔离指标。</span>
         </a>
         <a class="route-card" href="topology.html">
-          <b>主电路拓扑</b>
-          <span>PDF 原图、高清重绘图、功率路径与隔离关系。</span>
+          <b>拓扑与能量流</b>
+          <span>PDF 原图、高清重绘图、A 到 B 与 B 到 A 的能量流理解。</span>
         </a>
         <a class="route-card" href="modulation.html">
           <b>调制方式</b>
-          <span>SPS、DPS、TPS、EPS 与变频控制的原理对比。</span>
+          <span>SPS、DPS、TPS、EPS 和变频控制，重点解释为什么工程选择 TPS 思路。</span>
         </a>
         <a class="route-card" href="control.html">
           <b>控制策略</b>
-          <span>采样、状态机、PI 分层调节、故障保护。</span>
+          <span>ADC 采样、信号处理、状态机、PI、相位命令和 HRTIM 输出。</span>
         </a>
         <a class="route-card" href="firmware.html">
           <b>固件工程</b>
-          <span>STM32G474、HRTIM、ADC、LCD、按键和网页遥控工具。</span>
+          <span>把网站讲解落到 STM32G474 工程文件和模块职责上。</span>
         </a>
       </div>
     </section>
@@ -125,37 +133,45 @@
           <h2>一句话讲清这个装置</h2>
         </div>
         <p>
-          它不是普通降压或升压电源，而是一个隔离式双向能量交换平台：通过两个有源桥产生高频方波，
-          经过串联谐振腔和变压器传能，再用移相、采样和状态机控制电流方向与充电阶段。
+          它是一个隔离式双向能量交换平台：两侧有源桥产生高频方波，中间通过串联谐振腔和变压器传能，
+          控制器再用移相、采样和状态机决定充电阶段、电流大小和功率方向。
         </p>
       </div>
       <div class="core-strip">
-        <span>A 侧 12V 铅酸范围</span>
-        <span>HRTIM 四桥臂 PWM</span>
+        <span>A 侧 10V-15V</span>
+        <span>B 侧 3.0V-4.2V</span>
         <span>Lr-Cr 串联谐振</span>
         <span>高频隔离变压器</span>
-        <span>B 侧单节锂电范围</span>
+        <span>HRTIM 四桥臂 PWM</span>
+        <span>TPS 三重移相</span>
       </div>
     </section>
 
     <section class="section">
       <div class="section-head split">
         <div>
-          <p class="section-kicker">References</p>
-          <h2>我查资料时主要确认的方向</h2>
+          <p class="section-kicker">Evidence</p>
+          <h2>我用哪些依据补充理解</h2>
         </div>
-        <p>网站里的原理图是自绘的，公开资料主要用来确认 DAB/SR-DAB 调制思路和 STM32G4 HRTIM 适合做高分辨率互补 PWM。</p>
+        <p>
+          页面中的原理图是自绘的。公开资料主要用来确认 DAB 调制类别、双向 DC/DC 的应用场景，
+          以及 STM32G4 HRTIM 适合产生高分辨率互补 PWM。
+        </p>
       </div>
       <div class="source-panel">
-        <p>我没有把网上图片直接复制进页面，而是把查到的资料消化成自己的框图和解释，这样更像项目复盘，也更安全。</p>
-        <a href="https://www.st.com/resource/en/application_note/an5496-bidirectional-dcdc-converter-for-microgrid-applications-stmicroelectronics.pdf">ST AN5496 双向 DC/DC 参考</a>
-        <a href="https://wiki.stmicroelectronics.cn/stm32mcu/wiki/Getting_started_with_HRTIM">STM32 HRTIM 入门资料</a>
+        <p>
+          我没有直接复制网上图片，而是把参考资料消化成自己的框图和解释。这样既统一视觉风格，也更符合“学生复盘”的表达。
+        </p>
+        <a href="https://www.ti.com/lit/ug/tidues0f/tidues0f.pdf">TI TIDA-010054 DAB 参考设计</a>
+        <a href="https://www.ti.com/video/6052772079001">TI Dual Active Bridge 原理视频</a>
+        <a href="https://wiki.st.com/stm32mcu/wiki/Getting_started_with_HRTIM">STM32 HRTIM 入门资料</a>
+        <a href="https://e-archivo.uc3m.es/entities/publication/2d994c9b-6fbd-4f81-85a9-fc033a703ab8">TPS 调制开放论文</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>zhongdui_srdab · SR-DAB project showcase</span>
+    <span>zhongdui_srdab · SR-DAB student project showcase</span>
     <a href="https://github.com/haise97/zhongdui_srdab">GitHub 仓库</a>
   </footer>
 

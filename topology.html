@@ -42,6 +42,20 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Energy Flow</p>
+          <h2>我先把功率方向拆成两条路径</h2>
+        </div>
+        <p>理解双向变换时，最容易混乱的是“谁在供电、谁在被充电”。我先把所有工况归纳成 A→B 和 B→A，再分别处理电流目标和截止电压。</p>
+      </div>
+      <figure class="showcase-figure">
+        <img src="assets/energy-flow-modes.svg" alt="SR-DAB 双向能量流示意图">
+        <figcaption>A→B 对应基本要求；B→A 对应发挥一，以及发挥二中的反向供能判断。</figcaption>
+      </figure>
+    </section>
+
     <section class="section highlight-band">
       <div class="section-head split">
         <div>
@@ -54,6 +68,21 @@
         <img src="assets/pdf-topology-original.png" alt="PDF 原题串联谐振有源双桥实验装置框图">
         <figcaption>题目 PDF 中的“串联谐振有源双桥实验装置框图”。</figcaption>
       </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">My Understanding</p>
+          <h2>为什么这个拓扑适合这道题</h2>
+        </div>
+        <p>题目同时要双向、隔离、可设电流、截止电压和状态显示。SR-DAB 的优势是功率方向可以由相位关系控制，硬件拓扑不需要为正反向分别搭两套功率级。</p>
+      </div>
+      <div class="lesson-grid">
+        <article><b>隔离是题目硬约束</b><span>高频变压器不是可选项，它把 A/B 两侧功率级隔开，也给低压侧匹配留下空间。</span></article>
+        <article><b>谐振腔让电流可控</b><span>低压大电流下，直接硬切换很容易让损耗和尖峰变难处理，Lr-Cr 给电流形状一个缓冲。</span></article>
+        <article><b>有源桥支持双向</b><span>同一套桥臂可以逆变也可以同步整流，适合题目中 A→B 和 B→A 的切换。</span></article>
+      </div>
     </section>
   </main>
   <footer class="footer"><span>zhongdui_srdab · 主电路拓扑</span><a href="modulation.html">下一页：调制</a></footer>

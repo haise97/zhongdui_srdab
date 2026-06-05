@@ -43,6 +43,10 @@
         <article><span>3</span><b>判断</b><p>根据电压区间进入预充、恒流、恒压、双向切换或故障状态。</p></article>
         <article><span>4</span><b>输出</b><p>生成主移相和两侧内移相命令，交给 HRTIM 输出互补 PWM。</p></article>
       </div>
+      <div class="reference-panel">
+        <h3>为什么要分层</h3>
+        <p>如果把电压误差直接变成相位大步变化，低压大电流侧容易出现突变。分层之后，电压外环只慢慢生成电流目标，电流环再调相位，状态机负责决定当前是否应该预充、恒流、恒压或保护。</p>
+      </div>
     </section>
 
     <section class="section highlight-band">
@@ -70,6 +74,22 @@
           <h3><code>TPS0_4_2</code> 寻优扫描</h3>
           <p>围绕 4.2V 锂电目标扫描相位点，记录最佳点，并通过 PC 电流输入与确认帧辅助调试。</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Code Evidence</p>
+          <h2>控制页面对应哪些代码证据</h2>
+        </div>
+        <p>我希望这个网站不是“凭空讲控制”，所以把每个控制概念都指向一个工程模块。</p>
+      </div>
+      <div class="mapping-table" role="table" aria-label="控制策略与代码对应表">
+        <div role="row"><b role="cell">采样与物理量</b><span role="cell"><code>ADC_Signal_Process.*</code></span><em role="cell">钳位、拟合、限斜率、低通，输出 A/B 电压电流。</em></div>
+        <div role="row"><b role="cell">PWM 与相位</b><span role="cell"><code>PWM_SR_DAB.*</code></span><em role="cell">主移相、左右内移相、频率、故障关断和 HRTIM 输出。</em></div>
+        <div role="row"><b role="cell">工况状态机</b><span role="cell"><code>TPS_0 / TPS_1 / TPS_2</code></span><em role="cell">基本要求、发挥一、发挥二分别独立处理。</em></div>
+        <div role="row"><b role="cell">显示与交互</b><span role="cell"><code>LCD_SR_DAB.* / KEY_mode.*</code></span><em role="cell">显示端口状态、切换页面、调节目标和清故障。</em></div>
       </div>
     </section>
 
