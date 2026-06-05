@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>主电路拓扑 | zhongdui_srdab</title>
+  <meta name="description" content="SR-DAB 主电路拓扑、PDF 原图、高清重绘图、端口与功率流解释。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="topology">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">ZD</span><span>zhongdui_srdab</span></a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="section-kicker">Power Stage</p>
+      <h1>主电路拓扑</h1>
+      <p>SR-DAB 由两个有源桥、串联谐振腔和高频隔离变压器组成。桥臂产生高频方波，谐振腔承担电流塑形，变压器完成隔离与变比匹配。</p>
+    </section>
+
+    <section class="section">
+      <figure class="showcase-figure">
+        <img src="assets/topology-srdab.svg" alt="串联谐振有源双桥拓扑重绘图">
+        <figcaption>高清重绘版：突出 A/B 端口、两侧有源桥、Lr-Cr 谐振腔、隔离变压器和双向能量流。</figcaption>
+      </figure>
+      <div class="topology-grid">
+        <article><b>左侧有源桥</b><span>HRTIM A/B 输出互补 PWM，形成 A 侧高频方波电压。</span></article>
+        <article><b>串联谐振腔</b><span>Lr 与 Cr 限制电流斜率，配合移相控制改善软开关条件。</span></article>
+        <article><b>隔离变压器</b><span>满足题目要求的功率隔离传输，同时用于电压等级匹配。</span></article>
+        <article><b>右侧有源桥</b><span>根据功率方向工作在同步整流或逆变状态，B 侧电压电流参与闭环。</span></article>
+      </div>
+    </section>
+
+    <section class="section highlight-band">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Original Figure</p>
+          <h2>PDF 原题框图</h2>
+        </div>
+        <p>下面保留 PDF 中的原始框图裁图，便于和题目表达对照。网页重绘图用于解释，原图用于溯源。</p>
+      </div>
+      <figure class="showcase-figure compact">
+        <img src="assets/pdf-topology-original.png" alt="PDF 原题串联谐振有源双桥实验装置框图">
+        <figcaption>题目 PDF 中的“串联谐振有源双桥实验装置框图”。</figcaption>
+      </figure>
+    </section>
+  </main>
+  <footer class="footer"><span>zhongdui_srdab · 主电路拓扑</span><a href="modulation.html">下一页：调制</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

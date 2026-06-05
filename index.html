@@ -3,374 +3,140 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>zhongdui_srdab | 串联谐振有源双桥试验装置</title>
-  <meta name="description" content="B题串联谐振有源双桥试验装置项目展示：题目要求、拓扑、调制方式、控制策略、固件工程和部署说明。">
+  <title>zhongdui_srdab | SR-DAB 项目展示</title>
+  <meta name="description" content="串联谐振有源双桥试验装置项目展示首页：任务、拓扑、调制、控制与 STM32G474 工程实现。">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header class="site-header" id="top">
-    <nav class="nav" aria-label="页面导航">
-      <a class="brand" href="#top" aria-label="回到顶部">
-        <span class="brand-mark">SR</span>
-        <span>zhongdui_srdab</span>
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-links" id="navLinks">
-        <a href="#task">题目</a>
-        <a href="#topology">拓扑</a>
-        <a href="#modulation">调制</a>
-        <a href="#control">控制</a>
-        <a href="#firmware">工程</a>
-        <a href="#deploy">发布</a>
-      </div>
-    </nav>
+<body data-page="home">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
 
-    <section class="hero section-pad">
-      <div class="hero-copy">
-        <p class="eyebrow">zhongdui_srdab | B题 串联谐振有源双桥试验装置</p>
-        <h1>面向双向电池能量交换的隔离式 SR-DAB 实验平台</h1>
-        <p class="lead">
-          本站把题目 PDF、主电路框图、调制策略和 STM32G474 工程代码整理成一份可公开访问的项目说明，
-          用于展示从竞赛任务到工程实现的完整路径。
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="#topology">查看拓扑</a>
-          <a class="button secondary" href="#modulation">理解调制方式</a>
-        </div>
-      </div>
-      <div class="hero-panel" aria-label="项目关键指标">
-        <div>
-          <span class="metric-value">10-15V</span>
-          <span class="metric-label">A侧铅酸端口</span>
-        </div>
-        <div>
-          <span class="metric-value">3.0-4.2V</span>
-          <span class="metric-label">B侧锂电端口</span>
-        </div>
-        <div>
-          <span class="metric-value">0.5-3A</span>
-          <span class="metric-label">B侧可设电流</span>
-        </div>
-        <div>
-          <span class="metric-value">20kHz</span>
-          <span class="metric-label">工程默认 PWM</span>
-        </div>
-      </div>
-    </section>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="zhongdui_srdab 首页">
+      <span class="brand-mark">ZD</span>
+      <span>zhongdui_srdab</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
   </header>
 
   <main>
-    <section class="section section-pad" id="task">
-      <div class="section-head">
-        <p class="eyebrow">Task Definition</p>
-        <h2>题目要求被拆成三个工作场景</h2>
-        <p>
-          装置有 a/a' 与 b/b' 两对端口，通过高频变压器隔离传输功率，前后级控制与通信也需要隔离。
-          A1、A2 为直流电流表，检测与控制电路从主电路中取电。
-        </p>
+    <section class="hero home-hero">
+      <div class="hero-badge">2026 电赛题目整理 · 隔离双向变换 · STM32G474</div>
+      <h1>串联谐振有源双桥试验装置</h1>
+      <p class="hero-subtitle">
+        把 B 题要求、SR-DAB 拓扑、三重移相调制、闭环控制策略和本地固件工程整理成一个可公开访问的项目作品站。
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="topology.html">看拓扑</a>
+        <a class="button secondary" href="modulation.html">看调制原理</a>
       </div>
-
-      <div class="mode-grid">
-        <article class="mode-card">
-          <span class="tag">基本要求</span>
-          <h3>A侧供电，B侧充电</h3>
-          <p>S1、S3 导通，S2、S4 断开。BT1 由 10V-15V 直流稳压源供电，RL2 工作在 CV 模式。</p>
-          <ul>
-            <li>B侧电压不高于 3.0V 时，输出 0.5A 预充电流。</li>
-            <li>B侧达到 4.2V 后，保持 4.2V 恒压输出。</li>
-            <li>3.0V-4.2V 区间内，B侧输出电流可设为 0.5A-3.0A。</li>
-          </ul>
+      <div class="hero-metrics" aria-label="项目核心指标">
+        <article>
+          <strong>10-15V</strong>
+          <span>A 侧铅酸端口</span>
         </article>
-
-        <article class="mode-card">
-          <span class="tag">发挥一</span>
-          <h3>B侧供电，A侧充电</h3>
-          <p>S1、S3 断开，S2、S4 导通。BT2 由 3.0V-4.2V 直流稳压源供电，RL1 工作在 CV 模式。</p>
-          <ul>
-            <li>A侧电压不高于 10.0V 时，输出 0.1A 预充电流。</li>
-            <li>A侧达到 15.0V 后，保持 15.0V 恒压输出。</li>
-            <li>10.0V-15.0V 区间内，A侧输出电流可设为 0.1A-1.0A。</li>
-          </ul>
+        <article>
+          <strong>3.0-4.2V</strong>
+          <span>B 侧锂电端口</span>
         </article>
-
-        <article class="mode-card">
-          <span class="tag">发挥二</span>
-          <h3>负载条件决定功率方向</h3>
-          <p>S1、S2、S4 导通，S3 断开。BT1 为 15.0V、1.0A 限流源，BT2 为未充满 18650 锂电池。</p>
-          <ul>
-            <li>RL1 设为 11.5V-15V 时，电路给 BT2 充电，充电电流不超过设定值。</li>
-            <li>RL1 设为小于 11V 时，由 BT2 供电并给 BT1 充电。</li>
-            <li>BT2 输出电流可在 0.5A-3A 之间设置。</li>
-          </ul>
+        <article>
+          <strong>0.5-3A</strong>
+          <span>B 侧可设电流</span>
+        </article>
+        <article>
+          <strong>TPS</strong>
+          <span>三重移相控制</span>
         </article>
       </div>
     </section>
 
-    <section class="section section-pad accent-band" id="topology">
-      <div class="section-head">
-        <p class="eyebrow">Topology</p>
-        <h2>主电路拓扑与端口关系</h2>
-        <p>
-          题目框图的核心是两个有源桥、串联谐振腔和隔离变压器。A侧适配 12V 铅酸电池范围，
-          B侧适配单节锂离子电池范围，功率方向由主移相符号、端口条件和状态机共同决定。
-        </p>
-      </div>
-
-      <div class="topology-layout">
-        <figure class="figure-card">
-          <img src="assets/topology-srdab.svg" alt="串联谐振有源双桥拓扑重绘图">
-          <figcaption>网页重绘版：突出 A/B 端口、两侧有源桥、串联 Lr-Cr 谐振腔、隔离变压器和能量流。</figcaption>
-        </figure>
-
-        <div class="topology-notes">
-          <article>
-            <h3>左侧有源桥</h3>
-            <p>由 A、B 两组半桥构成，通过 HRTIM 输出互补 PWM，等效产生高频方波电压。</p>
-          </article>
-          <article>
-            <h3>串联谐振网络</h3>
-            <p>Lr 与 Cr 形成电流通道，限制尖峰并塑造谐振电流，为软开关创造条件。</p>
-          </article>
-          <article>
-            <h3>隔离变压器</h3>
-            <p>完成电气隔离与变比匹配，是题目要求“功率隔离传输”的关键部件。</p>
-          </article>
-          <article>
-            <h3>右侧有源桥</h3>
-            <p>同步整流或逆变取决于功率方向；B侧电流、电压直接参与预充、恒流和恒压判断。</p>
-          </article>
-        </div>
-      </div>
-
-      <figure class="wide-figure">
-        <img src="assets/pdf-topology-original.png" alt="题目 PDF 中的串联谐振有源双桥实验装置框图">
-        <figcaption>PDF 原题拓扑裁图，用于保留题目原始表达。</figcaption>
-      </figure>
-    </section>
-
-    <section class="section section-pad" id="modulation">
-      <div class="section-head">
-        <p class="eyebrow">Modulation</p>
-        <h2>调制方式从单移相扩展到三重移相</h2>
-        <p>
-          工程代码实际围绕 TPS 展开：主移相控制功率方向与粗功率，左桥内移相和右桥内移相用于调节等效脉宽、
-          降低环流并改善软开关。下面把常见方式与本工程变量对应起来。
-        </p>
-      </div>
-
-      <div class="tabbar" role="tablist" aria-label="调制方式">
-        <button class="tab active" type="button" data-tab="sps" role="tab" aria-selected="true">SPS 单移相</button>
-        <button class="tab" type="button" data-tab="dps" role="tab" aria-selected="false">DPS 双移相</button>
-        <button class="tab" type="button" data-tab="tps" role="tab" aria-selected="false">TPS 三重移相</button>
-        <button class="tab" type="button" data-tab="eps" role="tab" aria-selected="false">EPS 扩展移相</button>
-        <button class="tab" type="button" data-tab="vfm" role="tab" aria-selected="false">变频调制</button>
-      </div>
-
-      <div class="tab-panels">
-        <article class="tab-panel active" id="panel-sps" data-panel="sps">
-          <h3>SPS：只有主移相角，结构最清楚</h3>
-          <p>
-            单移相让两侧全桥都输出 50% 占空比方波，只改变原边方波和副边方波之间的相位差。
-            主移相角为正时能量从一侧流向另一侧，符号反过来时功率方向也反转。
-          </p>
-          <div class="wave-card">
-            <span>左桥方波</span>
-            <div class="wave wave-a"></div>
-            <span>右桥方波</span>
-            <div class="wave wave-b"></div>
-          </div>
-          <p>
-            优点是实现简单、易于调试；缺点是在 12V 与 3V-4.2V 这种宽电压比场景下，单靠主移相容易带来较大环流，
-            低功率段效率和软开关范围都会受影响。
-          </p>
+    <section class="section narrow">
+      <p class="section-kicker">Site Audit</p>
+      <h2>这次重构修掉了什么问题</h2>
+      <div class="audit-grid">
+        <article>
+          <span>01</span>
+          <h3>信息过密</h3>
+          <p>原来所有内容挤在一个长页面里，适合查资料，但不适合展示。现在拆成六个入口，手机上可以按主题阅读。</p>
         </article>
-
-        <article class="tab-panel" id="panel-dps" data-panel="dps">
-          <h3>DPS：主移相加一个桥内移相</h3>
-          <p>
-            双移相在 SPS 的基础上增加桥内移相，使其中一侧或两侧的等效输出脉宽不再固定。
-            这样可以把“传多少功率”和“桥臂电流形状”分开一点，降低 RMS 电流。
-          </p>
-          <p>
-            对 SR-DAB 来说，DPS 能让谐振腔电流更接近需要的形状，尤其在预充和小电流控制时，
-            比单移相更容易避免主移相过小导致的调节分辨率不足。
-          </p>
+        <article>
+          <span>02</span>
+          <h3>视觉记忆点弱</h3>
+          <p>新增动态能量场背景、首页关键指标和主题入口，让别人打开链接第一眼能知道这是一个 SR-DAB 作品。</p>
         </article>
-
-        <article class="tab-panel" id="panel-tps" data-panel="tps">
-          <h3>TPS：本工程采用的核心调制框架</h3>
-          <p>
-            三重移相有三个控制变量：主移相 <code>main_phase_deg</code>、左桥内移相 <code>left_inner_deg</code>、
-            右桥内移相 <code>right_inner_deg</code>。工程把主移相限制在 -90° 到 90°，
-            内移相限制在 0° 到 120°，默认 PWM 频率为 20kHz。
-          </p>
-          <div class="logic-grid">
-            <div>
-              <b>主移相</b>
-              <p>决定主要功率方向和粗调电流，正负号对应双向传输。</p>
-            </div>
-            <div>
-              <b>左桥内移相</b>
-              <p>改变左桥等效脉宽，参与细调、超细调和软开关窗口修正。</p>
-            </div>
-            <div>
-              <b>右桥内移相</b>
-              <p>改变右桥等效脉宽，在 B侧充电和反向工况中承担精细电流校正。</p>
-            </div>
-          </div>
-          <p>
-            代码中的 <code>TPS_0</code>、<code>TPS_1</code>、<code>TPS_2</code> 分别覆盖基本要求、反向充电和发挥二工况；
-            <code>TPS0_4_2</code> 还提供针对 4.2V 锂电目标的扫描、寻优和种子点机制。
-          </p>
-        </article>
-
-        <article class="tab-panel" id="panel-eps" data-panel="eps">
-          <h3>EPS：把桥内脉宽作为辅助自由度</h3>
-          <p>
-            扩展移相通常把一个桥的桥内移相与主移相联动，或者固定一个内移相后调另一个内移相。
-            它比 TPS 自由度少，但比 SPS 更适合宽电压范围。
-          </p>
-          <p>
-            在本项目中，EPS 可以作为 TPS 的简化调参入口：先用主移相建立功率方向，再只开放一侧内移相做效率和波形优化。
-            这样现场调试更稳，参数也更少。
-          </p>
-        </article>
-
-        <article class="tab-panel" id="panel-vfm" data-panel="vfm">
-          <h3>变频调制：利用谐振点附近的阻抗变化</h3>
-          <p>
-            串联谐振腔的谐振频率由 Lr 和 Cr 决定。靠近谐振点时传输能力增强，远离谐振点时等效阻抗上升。
-            变频调制可以作为移相控制的辅助量，用于改善轻载、预充或保护边界。
-          </p>
-          <p>
-            工程提供 <code>PWM_SR_DAB_SetFrequencyHz()</code> 接口，频率范围为 10kHz-100kHz，默认 20kHz。
-            因为题目更强调端口电流和截止电压，本项目把 TPS 电流闭环放在主位置，变频作为可扩展控制量。
-          </p>
+        <article>
+          <span>03</span>
+          <h3>工程脉络不够清楚</h3>
+          <p>把题目、拓扑、调制、控制和代码工程拆开讲，减少“看完拓扑又找不到控制策略”的跳读成本。</p>
         </article>
       </div>
     </section>
 
-    <section class="section section-pad accent-band" id="control">
-      <div class="section-head">
-        <p class="eyebrow">Control Strategy</p>
-        <h2>控制策略：先识别工况，再分层调相</h2>
-        <p>
-          固件不是直接把电压误差一次性变成大移相，而是按 ADC 物理量快照、阶段判断、电流环、外电压环和相位命令输出分层处理。
-        </p>
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Project Map</p>
+          <h2>从题目到工程实现的浏览路线</h2>
+        </div>
+        <p>建议先看题目边界，再看拓扑和调制方式，最后进入控制策略与固件代码。这样读起来更接近真实项目答辩逻辑。</p>
       </div>
-
-      <div class="pipeline">
-        <div class="pipe-step">
-          <span>1</span>
-          <h3>采样</h3>
-          <p>ADC1/2/3/4 分别采集 A电流、A电压、B电流、B电压，并经过钳位、拟合、限斜率、低通滤波。</p>
-        </div>
-        <div class="pipe-step">
-          <span>2</span>
-          <h3>判断</h3>
-          <p>根据端口电压进入预充、恒流、恒压、双向切换或故障保护状态。</p>
-        </div>
-        <div class="pipe-step">
-          <span>3</span>
-          <h3>调节</h3>
-          <p>主移相负责粗调，桥内移相负责细调和超细调，外电压环只缓慢生成电流目标。</p>
-        </div>
-        <div class="pipe-step">
-          <span>4</span>
-          <h3>输出</h3>
-          <p>HRTIM 生成四组互补 PWM，故障锁存时关闭输出，正常时保持可诊断状态。</p>
-        </div>
-      </div>
-
-      <div class="control-grid">
-        <article>
-          <h3>基本要求：<code>TPS_0</code></h3>
-          <p>B侧预充 0.5A，中段 0.5A-3A 恒流，接近 4.2V 后转恒压。主移相初值为 -20°，适配 A 到 B 的功率方向。</p>
-        </article>
-        <article>
-          <h3>发挥一：<code>TPS_1</code></h3>
-          <p>A侧预充 0.1A，中段 0.1A-1A 恒流，目标恒压 15V。代码同时监测 BT2 欠压、过压与 A侧过流。</p>
-        </article>
-        <article>
-          <h3>发挥二：<code>TPS_2</code></h3>
-          <p>根据 A侧电压阈值在给 BT2 充电与由 BT2 反向供能之间切换，方向状态包括空闲、BT2 充电、BT2 放电。</p>
-        </article>
-        <article>
-          <h3>4.2V 寻优：<code>TPS0_4_2</code></h3>
-          <p>围绕 4.2V 锂电目标建立扫描状态机，记录最佳点，结合 PC 电流输入与确认帧保存调试结果。</p>
-        </article>
+      <div class="route-grid">
+        <a class="route-card" href="task.html">
+          <b>题目任务</b>
+          <span>三类工况、端口电压范围、电流设定与截止电压。</span>
+        </a>
+        <a class="route-card" href="topology.html">
+          <b>主电路拓扑</b>
+          <span>PDF 原图、高清重绘图、功率路径与隔离关系。</span>
+        </a>
+        <a class="route-card" href="modulation.html">
+          <b>调制方式</b>
+          <span>SPS、DPS、TPS、EPS 与变频控制的原理对比。</span>
+        </a>
+        <a class="route-card" href="control.html">
+          <b>控制策略</b>
+          <span>采样、状态机、PI 分层调节、故障保护。</span>
+        </a>
+        <a class="route-card" href="firmware.html">
+          <b>固件工程</b>
+          <span>STM32G474、HRTIM、ADC、LCD、按键和网页遥控工具。</span>
+        </a>
       </div>
     </section>
 
-    <section class="section section-pad" id="firmware">
-      <div class="section-head">
-        <p class="eyebrow">Firmware Map</p>
-        <h2>工程代码结构</h2>
+    <section class="section highlight-band">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Core Idea</p>
+          <h2>一句话讲清这个装置</h2>
+        </div>
         <p>
-          工程位于 <code>SR_DAB</code> 目录，核心是 STM32G474 + HRTIM + 四路 ADC + LCD/按键/串口工具链。
+          它不是普通降压或升压电源，而是一个隔离式双向能量交换平台：通过两个有源桥产生高频方波，
+          经过串联谐振腔和变压器传能，再用移相、采样和状态机控制电流方向与充电阶段。
         </p>
       </div>
-
-      <div class="code-map">
-        <article>
-          <h3><code>Core/Src/main.c</code></h3>
-          <p>初始化 GPIO、DMA、ADC1-ADC4、USART1、HRTIM1、TIM16，然后启动板级任务。</p>
-        </article>
-        <article>
-          <h3><code>user/bsp/PWM_SR_DAB.*</code></h3>
-          <p>负责 HRTIM 周期、频率、互补输出、相位命令、故障关断和 PWM 诊断。</p>
-        </article>
-        <article>
-          <h3><code>user/bsp/ADC_Signal_Process.*</code></h3>
-          <p>把 ADC 引脚电压转换为 A/B 侧电压电流物理量，提供给 PI 与状态机。</p>
-        </article>
-        <article>
-          <h3><code>user/mode/TPS_0/1/2.*</code></h3>
-          <p>三类工况的闭环策略：预充、恒流、恒压、双向切换和故障保护。</p>
-        </article>
-        <article>
-          <h3><code>user/mode/KEY_mode.*</code></h3>
-          <p>16 键菜单入口，支持手动移相、自动扫相、频率设置和 TPS0_4_2 参数选择。</p>
-        </article>
-        <article>
-          <h3><code>tools/web_remote</code></h3>
-          <p>提供手机网页遥控桥接工具，电脑连接串口后，同一 WiFi 下手机可发送虚拟按键。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-pad" id="deploy">
-      <div class="section-head">
-        <p class="eyebrow">Publish</p>
-        <h2>发布到 GitHub Pages 后即可用链接访问</h2>
-        <p>
-          本站是纯静态文件，没有后端依赖。把 <code>10 网站</code> 目录上传到 GitHub 仓库并开启 Pages 后，
-          手机和电脑都可以通过浏览器访问同一个 HTTPS 链接。
-        </p>
-      </div>
-
-      <div class="deploy-card">
-        <ol>
-          <li>在 GitHub 新建仓库，例如 <code>zhongdui_srdab</code>。</li>
-          <li>把本目录中的 <code>index.html</code>、<code>style.css</code>、<code>script.js</code> 和 <code>assets</code> 上传到仓库根目录。</li>
-          <li>进入仓库 <code>Settings</code> -> <code>Pages</code>，选择 <code>Deploy from a branch</code>。</li>
-          <li>分支选择 <code>main</code>，目录选择 <code>/root</code>，保存后等待部署完成。</li>
-          <li>最终链接通常是 <code>https://你的用户名.github.io/zhongdui_srdab/</code>。</li>
-        </ol>
-        <p class="deploy-note">
-          所有图片都使用相对路径，网页不会引用本地磁盘路径，因此发布后不会因为本机目录变化而失效。
-        </p>
+      <div class="core-strip">
+        <span>A 侧 12V 铅酸范围</span>
+        <span>HRTIM 四桥臂 PWM</span>
+        <span>Lr-Cr 串联谐振</span>
+        <span>高频隔离变压器</span>
+        <span>B 侧单节锂电范围</span>
       </div>
     </section>
   </main>
 
-  <footer class="footer section-pad">
-    <p>zhongdui_srdab project showcase. 内容依据题目 PDF 与本地 STM32G474 工程整理。</p>
-    <a href="#top">回到顶部</a>
+  <footer class="footer">
+    <span>zhongdui_srdab · SR-DAB project showcase</span>
+    <a href="https://github.com/haise97/zhongdui_srdab">GitHub 仓库</a>
   </footer>
 
   <script src="script.js"></script>

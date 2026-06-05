@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>调制原理 | zhongdui_srdab</title>
+  <meta name="description" content="SR-DAB 调制方式解释：SPS、DPS、TPS、EPS 和变频调制。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="modulation">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">ZD</span><span>zhongdui_srdab</span></a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="section-kicker">Modulation</p>
+      <h1>从单移相到三重移相</h1>
+      <p>调制方式决定两个桥输出方波之间的相位关系，也决定谐振腔电流、软开关窗口和双向功率控制的细腻程度。</p>
+    </section>
+
+    <section class="section">
+      <div class="mod-grid">
+        <article class="mod-card">
+          <span class="pill">SPS</span>
+          <h2>单移相</h2>
+          <p>两侧全桥保持 50% 占空比，只改变原边与副边方波的主移相角。主移相越大，传输功率越大；符号反向时，功率方向反向。</p>
+          <div class="wave-stack" aria-hidden="true"><i></i><i></i></div>
+          <p class="note">优点是实现简单；缺点是在宽电压比和轻载时环流较大，低功率控制分辨率不足。</p>
+        </article>
+        <article class="mod-card">
+          <span class="pill amber">DPS</span>
+          <h2>双移相</h2>
+          <p>在主移相之外加入一个桥内移相，使其中一侧的等效输出脉宽可调。这样可以把功率传输和电流形状分开调一点。</p>
+          <p class="note">适合预充、小电流和宽输入范围场景，比 SPS 更容易降低 RMS 电流。</p>
+        </article>
+        <article class="mod-card important">
+          <span class="pill cyan">TPS</span>
+          <h2>三重移相</h2>
+          <p>本工程核心控制框架。三个变量分别是 <code>main_phase_deg</code>、<code>left_inner_deg</code>、<code>right_inner_deg</code>。</p>
+          <ul>
+            <li>主移相：决定主要功率方向和粗调电流。</li>
+            <li>左桥内移相：参与左侧等效脉宽与细调。</li>
+            <li>右桥内移相：参与右侧等效脉宽、精细电流校正和软开关窗口。</li>
+          </ul>
+        </article>
+        <article class="mod-card">
+          <span class="pill">EPS</span>
+          <h2>扩展移相</h2>
+          <p>可以理解为 TPS 的简化用法：开放主移相和一个桥内移相，固定另一个自由度。调试参数更少，但仍比 SPS 灵活。</p>
+          <p class="note">现场调试时可先用 EPS 找稳定区，再逐步开放 TPS 的第三个自由度。</p>
+        </article>
+        <article class="mod-card">
+          <span class="pill amber">VFM</span>
+          <h2>变频调制</h2>
+          <p>串联谐振腔的等效阻抗随频率变化。靠近谐振点传输能力强，远离谐振点传输能力弱，可作为移相控制的辅助量。</p>
+          <p class="note">工程提供 10kHz-100kHz 频率接口，默认 20kHz；当前以 TPS 电流闭环为主。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section highlight-band">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Implementation Link</p>
+          <h2>工程变量如何对应调制理论</h2>
+        </div>
+        <p>代码并不是只输出固定 PWM，而是把调制量变成可诊断的相位命令，再交给 HRTIM 生成四组互补波形。</p>
+      </div>
+      <div class="mapping-table" role="table" aria-label="调制变量对应表">
+        <div role="row"><b role="cell">主移相</b><span role="cell"><code>main_phase_deg</code></span><em role="cell">功率方向、粗调电流</em></div>
+        <div role="row"><b role="cell">左桥内移相</b><span role="cell"><code>left_inner_deg</code></span><em role="cell">左桥等效脉宽、细调</em></div>
+        <div role="row"><b role="cell">右桥内移相</b><span role="cell"><code>right_inner_deg</code></span><em role="cell">右桥等效脉宽、精细校正</em></div>
+        <div role="row"><b role="cell">频率</b><span role="cell"><code>PWM_SR_DAB_SetFrequencyHz()</code></span><em role="cell">10kHz-100kHz 可扩展控制量</em></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span>zhongdui_srdab · 调制原理</span><a href="control.html">下一页：控制</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

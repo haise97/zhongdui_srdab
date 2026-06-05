@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>控制策略 | zhongdui_srdab</title>
+  <meta name="description" content="SR-DAB 控制策略：ADC 处理、状态机、PI 调节、相位输出和保护逻辑。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="control">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">ZD</span><span>zhongdui_srdab</span></a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="section-kicker">Control</p>
+      <h1>分层控制策略</h1>
+      <p>固件把 ADC 物理量、工况识别、电流环、恒压外环和相位输出分层处理，避免电压误差直接造成相位大步跳变。</p>
+    </section>
+
+    <section class="section">
+      <div class="pipeline">
+        <article><span>1</span><b>采样</b><p>ADC1/2/3/4 分别采 A 电流、A 电压、B 电流、B 电压。</p></article>
+        <article><span>2</span><b>处理</b><p>钳位、MATLAB 拟合、限斜率、低通滤波，得到稳定物理量。</p></article>
+        <article><span>3</span><b>判断</b><p>根据电压区间进入预充、恒流、恒压、双向切换或故障状态。</p></article>
+        <article><span>4</span><b>输出</b><p>生成主移相和两侧内移相命令，交给 HRTIM 输出互补 PWM。</p></article>
+      </div>
+    </section>
+
+    <section class="section highlight-band">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Modes</p>
+          <h2>三个 TPS 状态机</h2>
+        </div>
+        <p>工程把三类题目工况拆成独立模块，便于分别调试，也避免一个状态机里塞入过多方向判断。</p>
+      </div>
+      <div class="state-grid">
+        <article>
+          <h3><code>TPS_0</code> 基本要求</h3>
+          <p>B 侧 0.5A 预充，中段 0.5A-3A 恒流，接近 4.2V 后转恒压。主移相初值偏向 A 到 B 的功率方向。</p>
+        </article>
+        <article>
+          <h3><code>TPS_1</code> 发挥一</h3>
+          <p>B 侧供能给 A 侧充电，A 侧 0.1A 预充、0.1A-1A 恒流和 15V 恒压，并监测 BT2 有效性。</p>
+        </article>
+        <article>
+          <h3><code>TPS_2</code> 发挥二</h3>
+          <p>根据 A 侧负载电压判断 BT2 充电或放电，方向包括空闲、给 BT2 充电、BT2 反向供能。</p>
+        </article>
+        <article>
+          <h3><code>TPS0_4_2</code> 寻优扫描</h3>
+          <p>围绕 4.2V 锂电目标扫描相位点，记录最佳点，并通过 PC 电流输入与确认帧辅助调试。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Protection</p>
+          <h2>保护和稳定性关注点</h2>
+        </div>
+        <p>项目展示页不应夸大实测结果，因此这里明确列出控制设计中已经体现的保护边界，以及后续仍应实测验证的内容。</p>
+      </div>
+      <div class="focus-grid">
+        <article><b>电压边界</b><span>B 侧过压、欠压，A 侧 15V 恒压和过压边界需要硬件实测确认。</span></article>
+        <article><b>电流边界</b><span>预充电流和可设电流需要与采样校准、电子负载模式一起验证。</span></article>
+        <article><b>故障锁存</b><span>PWM 模块提供故障关断和清除接口，避免异常状态继续输出。</span></article>
+        <article><b>相位限幅</b><span>主移相和内移相均有限幅与步进限制，减少闭环突变风险。</span></article>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span>zhongdui_srdab · 控制策略</span><a href="firmware.html">下一页：工程</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

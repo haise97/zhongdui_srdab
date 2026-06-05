@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>固件工程 | zhongdui_srdab</title>
+  <meta name="description" content="SR-DAB STM32G474 固件工程结构、关键模块、网页遥控工具和发布信息。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="firmware">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">ZD</span><span>zhongdui_srdab</span></a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="section-kicker">Firmware</p>
+      <h1>STM32G474 工程结构</h1>
+      <p>工程目录为 <code>SR_DAB</code>，核心外设包括 HRTIM、ADC1-ADC4、DMA、USART、TIM16、LCD 和 16 键输入。</p>
+    </section>
+
+    <section class="section">
+      <div class="code-grid">
+        <article><h2><code>Core/Src/main.c</code></h2><p>初始化 GPIO、DMA、ADC、USART、HRTIM、TIM16，并调用 <code>SR_DAB_Board_Start()</code> 启动业务模块。</p></article>
+        <article><h2><code>user/bsp/PWM_SR_DAB.*</code></h2><p>管理 HRTIM 周期、频率、相位命令、互补输出、故障关断和输出诊断。</p></article>
+        <article><h2><code>user/bsp/ADC_Signal_Process.*</code></h2><p>把 ADC 引脚电压转换为 A/B 侧电流电压物理量，提供给 PI 控制和显示。</p></article>
+        <article><h2><code>user/mode/TPS_0/1/2.*</code></h2><p>分别覆盖基本要求、发挥一和发挥二的闭环状态机。</p></article>
+        <article><h2><code>user/mode/KEY_mode.*</code></h2><p>负责按键菜单、手动移相、自动扫相、PWM 频率和 TPS0_4_2 参数入口。</p></article>
+        <article><h2><code>tools/web_remote</code></h2><p>电脑连接 STM32 串口后，可在同一 WiFi 下用手机网页发送虚拟按键。</p></article>
+      </div>
+    </section>
+
+    <section class="section highlight-band">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Public Site</p>
+          <h2>公网访问与仓库</h2>
+        </div>
+        <p>这个展示站是纯静态站点，可以通过 GitHub Pages 在手机和电脑浏览器中访问。</p>
+      </div>
+      <div class="link-panel">
+        <a href="https://haise97.github.io/zhongdui_srdab/">公网网站</a>
+        <a href="https://github.com/haise97/zhongdui_srdab">GitHub 仓库</a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span>zhongdui_srdab · 固件工程</span><a href="index.html">回到首页</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>

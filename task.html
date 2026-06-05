@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>题目任务 | zhongdui_srdab</title>
+  <meta name="description" content="B题串联谐振有源双桥试验装置的任务要求、基本要求和发挥部分。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="task">
+  <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">ZD</span><span>zhongdui_srdab</span></a>
+    <button class="nav-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" id="siteNav" aria-label="主导航">
+      <a href="index.html" data-nav="home">首页</a>
+      <a href="task.html" data-nav="task">题目</a>
+      <a href="topology.html" data-nav="topology">拓扑</a>
+      <a href="modulation.html" data-nav="modulation">调制</a>
+      <a href="control.html" data-nav="control">控制</a>
+      <a href="firmware.html" data-nav="firmware">工程</a>
+    </nav>
+  </header>
+  <main>
+    <section class="page-hero">
+      <p class="section-kicker">Problem Statement</p>
+      <h1>题目任务与工作场景</h1>
+      <p>装置具有 a/a' 与 b/b' 两对端口，A 侧兼容 12V 铅酸电池范围，B 侧兼容 3.6V 锂离子电池范围，可设置端口电流和被充电截止电压。</p>
+    </section>
+
+    <section class="section">
+      <div class="scenario-grid">
+        <article class="scenario-card">
+          <span class="pill">基本要求</span>
+          <h2>A 侧供电，B 侧充电</h2>
+          <p>S1、S3 导通，S2、S4 断开。BT1 由 10V-15V 直流稳压源供电，RL2 使用直流电子负载 CV 模式。</p>
+          <ul>
+            <li>B 端电压不高于 3.0V 时，输出 0.5A 预充电流。</li>
+            <li>B 端达到 4.2V 后，保持 4.2V 恒压输出。</li>
+            <li>B 端 3.0V-4.2V 区间内，输出电流可设为 0.5A-3.0A。</li>
+            <li>显示两端电压、电流、电流方向、功率和充电状态。</li>
+          </ul>
+        </article>
+        <article class="scenario-card">
+          <span class="pill amber">发挥部分一</span>
+          <h2>B 侧供电，A 侧充电</h2>
+          <p>S1、S3 断开，S2、S4 导通。BT2 由 3.0V-4.2V 直流稳压源供电，RL1 使用 CV 模式。</p>
+          <ul>
+            <li>A 端电压不高于 10.0V 时，输出 0.1A 预充电流。</li>
+            <li>A 端达到 15.0V 后，保持 15.0V 恒压输出。</li>
+            <li>A 端 10.0V-15.0V 区间内，输出电流可设为 0.1A-1.0A。</li>
+          </ul>
+        </article>
+        <article class="scenario-card">
+          <span class="pill cyan">发挥部分二</span>
+          <h2>负载条件决定功率方向</h2>
+          <p>S1、S2、S4 导通，S3 断开。BT1 为 15.0V、1.0A 限流源，BT2 为未充满 18650 锂电池。</p>
+          <ul>
+            <li>RL1 设置为 11.5V-15V 时，电路给 BT2 充电。</li>
+            <li>RL1 设置小于 11V 时，由 BT2 供电并给 BT1 充电。</li>
+            <li>BT2 输出电流在 0.5A-3A 之间可设置。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section highlight-band">
+      <div class="section-head split">
+        <div>
+          <p class="section-kicker">Design Focus</p>
+          <h2>题目真正考察的能力</h2>
+        </div>
+        <p>这道题的难点不只是做出一个能传能的 DAB，而是在低压大电流、宽电压比、隔离通信、双向功率流和充电阶段切换之间保持可控。</p>
+      </div>
+      <div class="focus-grid">
+        <article><b>低压大电流</b><span>B 侧只有 3V-4.2V，电流 3A 时导通损耗、采样精度和布线压降都很敏感。</span></article>
+        <article><b>双向闭环</b><span>主移相符号变化会改变功率方向，状态机必须防止误判和突变。</span></article>
+        <article><b>隔离要求</b><span>功率级和通信都要隔离，控制电路还要从主电路取电。</span></article>
+        <article><b>人机交互</b><span>需要能设置电流、显示方向、功率和充电状态，不能只停留在裸 PWM。</span></article>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><span>zhongdui_srdab · 题目任务</span><a href="topology.html">下一页：拓扑</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>
